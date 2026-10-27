@@ -10,7 +10,7 @@ from pathlib import Path
 
 from PIL import Image
 
-from check_dataset import run_check
+from scripts.check_dataset import run_check
 
 
 def file_hashes(root):

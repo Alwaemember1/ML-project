@@ -13,7 +13,7 @@ from pathlib import Path
 
 from smoke_utils import (ROOT, build_transform, image_tensor, model_for_classes,
                          save_json, seed_torch, sha256_file, validate_mapping)
-from prepare_formal_split import SPLIT, read_rows, verify_split
+from scripts.prepare_formal_split import SPLIT, read_rows, verify_split
 from evaluation_metrics import classification_metrics, confusion_pairs, audit_records
 from evaluation_outputs import write_csv, heatmap, sample_cases, make_report
 
@@ -81,7 +81,9 @@ def main():
         raise ValueError("检查点模型配置不符")
     if checkpoint["training_config"] != config or checkpoint["preprocessing"].get("random_augmentation") is not False:
         raise ValueError("检查点训练配置或确定性预处理不符")
-    for name in ("smoke_utils.py", "prepare_formal_split.py"):
+    for name in ("smoke_utils.py", "scripts/prepare_formal_split.py"):
+        if name not in config["source_code_sha256"]:
+            raise ValueError("此训练记录使用历史源码结构；请审查原source_snapshot，不要修改来源锁或重新测试。")
         if sha256_file(ROOT / name) != config["source_code_sha256"][name]:
             raise ValueError(f"共用读取/预处理或划分实现已改变，先人工定位：{name}")
     registry_path = ROOT / "final_test_registry.json"
@@ -111,7 +113,7 @@ def main():
         raise ValueError("数据根目录与固定划分不一致")
     output = ROOT / "reports" / now().strftime("final_test_%Y%m%d_%H%M%S_%f")
     output.mkdir(parents=True, exist_ok=False)
-    command = f"& '{sys.executable}' '{Path(__file__).resolve()}' --training-run '{training_run}'"
+    command = f"& '{sys.executable}' -m scripts.evaluate_final --training-run '{training_run}'"
     if args.implementation_fix_reason:
         command += " --implementation-fix-reason " + json.dumps(args.implementation_fix_reason, ensure_ascii=False)
     identity = {"checkpoint": str(checkpoint_path), "checkpoint_sha256": checkpoint_hash, "epoch": 3,
@@ -131,7 +133,7 @@ def main():
                          "implementation_fix_reason": args.implementation_fix_reason,
                          "prior_evaluation": str(registry_path) if registry_path.exists() else None,
                          "script_sha256": {name: sha256_file(ROOT / name) for name in
-                                            ("evaluate_final.py", "evaluation_metrics.py", "evaluation_outputs.py")},
+                                            ("scripts/evaluate_final.py", "evaluation_metrics.py", "evaluation_outputs.py")},
                          "limitation": LIMITATION}
     save_json(output / "evaluation_config.json", evaluation_config)
     if not registry_path.exists():

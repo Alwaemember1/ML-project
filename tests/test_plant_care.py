@@ -10,7 +10,7 @@ from plant_care import (DISEASE_CARE, RISK_SCOPE, SEVERITY_SCOPE, build_predicti
 class PlantCareTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.record = json.loads((Path(__file__).parent / "FINAL_MODEL.json").read_text(encoding="utf-8"))
+        cls.record = json.loads((Path(__file__).resolve().parents[1] / "FINAL_MODEL.json").read_text(encoding="utf-8"))
 
     def test_exact_class_coverage_and_sources(self):
         mapping = self.record["class_to_idx"]

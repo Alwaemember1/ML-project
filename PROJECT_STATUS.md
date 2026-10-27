@@ -1,5 +1,19 @@
 # 项目状态：课程报告与演示资料已整理，原网页模型继续冻结
 
+## GitHub开源版目录与文档整理 2026年10月27日
+
+按用户要求，将项目整理为准备上传GitHub的源码仓库。用户明确选择MIT，仅覆盖原创代码；新增LICENSE、THIRD_PARTY_NOTICES、CONTRIBUTING、SECURITY、模型和数据说明。第三方数据、权重及网页资料不自动继承MIT，原图与模型不进入源码包，本轮未建立或发布GitHub远端。
+
+15个原根目录命令行脚本迁入scripts/，原单元测试迁入tests/，统一使用python -m scripts.<名称>。根目录保留app.py、predict_image.py和共用模块；历史报告中的旧命令仅用于追溯，当前执行说明以根目录README为准。迁移前已提交源码完整备份至reports/github_restructure_20261027/source_before.zip，原冻结记录、模型、最终测试登记和固定划分字节不改。
+
+根目录README详细说明CPU/GPU安装、首次权重配置、启动、预测、测试、元数据核对、原实验工件、训练首轮门控、验证及最终测试边界、打包、GitHub发布和常见错误。CPU版固定torch2.13.0/torchvision0.28.0在官方索引查询可用，未为整理任务重装现有环境。
+
+新增project_config.py及scripts.configure_model、scripts.doctor。新部署以FINAL_MODEL.local.json或LEAF_MODEL_RECORD设置本地路径，保留原FINAL_MODEL.json不覆盖；诊断命令不下载、不训练。scripts.prepare_formal_split的--metadata-only只检查仓库内清单，不声称外部来源及smoke归属已核验，正式训练仍默认严格检查。scripts.export_source导出不含本机工件的源码ZIP，不自动上传。
+
+默认测试24项，其中23通过、1项真实权重集成检查显式跳过；18个CLI模块--help和语法检查通过。另行显式开启真实权重合成图片网页检查，结果见本轮completion及integration记录。整理前后同一内存合成图片的39维CPU概率完全一致，无原始数据图片读取、训练或重新评价测试集。GitHub Actions工作流已添加，尚无远端实际执行结果；全新CPU环境安装及其他平台未验收。
+
+以下为此前阶段历史记录。部分历史工具需要原reports工件；仅克隆代码不具备这些输入，不能因此修改来源锁或登记来冒充复现。
+
 ## 交付版启动环境修复 2026年10月27日
 
 用户在teacher_demo_20261027_v1中遇到“Project Python was not found”。原因是交付ZIP不含虚拟环境，而旧启动器仅查找包内.venv，没有复用本机已有的原项目环境。

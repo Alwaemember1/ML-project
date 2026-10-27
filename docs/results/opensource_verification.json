@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "date": "2026-10-27",
+  "default_tests": {
+    "run": 24,
+    "passed": 23,
+    "skipped_explicit_model_test": 1
+  },
+  "cli_help_modules_passed": 18,
+  "synthetic_real_model_integration": {
+    "status": "passed",
+    "local_config_cli_verified": true,
+    "all39_cpu_probabilities_match_pre_restructure": true,
+    "original_sha256_and_preprocessing_preserved": true,
+    "explicit_real_model_apptest_11_extensions": true,
+    "raw_dataset_images_opened": 0,
+    "model_trained_or_test_set_evaluated": false
+  },
+  "clean_source_verification": {
+    "status": "passed",
+    "source_zip_files": 37,
+    "unit_tests": 24,
+    "passed": 23,
+    "skipped_real_model_test": 1,
+    "torch_load_forbidden_during_default_tests": true,
+    "raw_data_and_weights_not_in_source_zip": true,
+    "metadata_only_split_check": true,
+    "readme_and_core_doc_links_valid": true,
+    "missing_config_doctor_exit1": true,
+    "new_environment_installation": false,
+    "github_actions_executed": false
+  },
+  "teacher_v3_page_and_cpu_inference": true,
+  "original_record_model_registry_and_split_bytes_unchanged": true,
+  "cpu_wheel_versions_found_on_official_index": true,
+  "fresh_cpu_environment_installation_performed": false,
+  "github_actions_executed": false,
+  "github_repository_created_or_pushed": false
+}

@@ -32,3 +32,18 @@ deliverables/
 *.rar
 Thumbs.db
 Desktop.ini
+
+# Local model locations and generated runtime metadata
+FINAL_MODEL.local.json
+FINAL_MODEL.*.local.json
+.runtime/
+*.egg-info/
+build/
+dist/
+.coverage
+htmlcov/
+.streamlit/secrets.toml
+*.p12
+*.pfx
+.DS_Store
+.ipynb_checkpoints/

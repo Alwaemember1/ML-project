@@ -9,8 +9,8 @@ from pathlib import Path
 
 from smoke_utils import (ROOT, build_transform, model_for_classes, save_json, seed_torch,
                          sha256_file, tensor_digest)
-from train_smoke import SmokeImages
-from prepare_formal_split import SPLIT, read_rows, verify_split
+from scripts.train_smoke import SmokeImages
+from scripts.prepare_formal_split import SPLIT, read_rows, verify_split
 from evaluation_metrics import classification_metrics
 
 import torch

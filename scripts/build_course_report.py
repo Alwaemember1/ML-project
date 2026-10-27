@@ -13,7 +13,7 @@ from class_labels import category_kind, display_name
 from plant_care import (CHECKED_DATE, REFERENCE_VERSION, RISK_SCOPE, SEVERITY_SCOPE,
                         SOURCES, care_for_class, validate_coverage)
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def read_json(path):

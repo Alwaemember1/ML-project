@@ -8,7 +8,7 @@ import random
 from collections import defaultdict
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 SPLIT = ROOT / "splits" / "formal_sha256_seed42_v1"
 BASELINE = ROOT / "reports" / "check_20261016_133031_170321"
 AUDIT = ROOT / "reports" / "pretrain_20261016_230415"
@@ -37,7 +37,7 @@ def write_rows(path, rows, fields):
         writer.writerows(rows)
 
 
-def verify_split(directory=SPLIT):
+def verify_split(directory=SPLIT, *, verify_sources=True):
     directory = Path(directory)
     lock = json.loads((directory / "split_lock.json").read_text(encoding="utf-8"))
     for name, expected in lock["artifact_sha256"].items():
@@ -47,9 +47,10 @@ def verify_split(directory=SPLIT):
     if hashlib.sha256(canonical).hexdigest() != lock["split_id"]:
         raise ValueError("划分标识不匹配")
     config = json.loads((directory / "split_config.json").read_text(encoding="utf-8"))
-    for source, expected in config["source_sha256"].items():
-        if digest(source) != expected:
-            raise ValueError(f"来源清单已改变：{source}")
+    if verify_sources:
+        for source, expected in config["source_sha256"].items():
+            if digest(source) != expected:
+                raise ValueError(f"来源清单已改变：{source}")
     mapping = json.loads((directory / "class_to_idx.json").read_text(encoding="utf-8"))
     rows = {part: read_rows(directory / f"{part}.csv") for part in ("train", "validation", "test")}
     path_sets = {part: {row["relative_path"] for row in items} for part, items in rows.items()}
@@ -69,15 +70,17 @@ def verify_split(directory=SPLIT):
     if any(value for pair in overlaps.values() for value in pair.values()):
         raise ValueError("跨集合路径或 SHA256 重复")
     smoke_hashes = set()
-    for path in config["smoke_manifests"]:
-        smoke_hashes.update(row["sha256"] for row in read_rows(path))
-    if not smoke_hashes.issubset(hash_sets["train"]) or smoke_hashes & (hash_sets["validation"] | hash_sets["test"]):
-        raise ValueError("smoke 样本未被全部锁入训练集")
+    if verify_sources:
+        for path in config["smoke_manifests"]:
+            smoke_hashes.update(row["sha256"] for row in read_rows(path))
+        if not smoke_hashes.issubset(hash_sets["train"]) or smoke_hashes & (hash_sets["validation"] | hash_sets["test"]):
+            raise ValueError("smoke 样本未被全部锁入训练集")
     if sum(len(items) for items in rows.values()) != config["unique_representatives"]:
         raise ValueError("划分总数不正确")
     return {"split_id": lock["split_id"], "counts": {part: len(items) for part, items in rows.items()},
-            "overlaps": overlaps, "smoke_unique_hashes": len(smoke_hashes),
-            "all_smoke_hashes_train_only": True, "all_classes_in_each_split": True,
+            "overlaps": overlaps, "smoke_unique_hashes": len(smoke_hashes) if verify_sources else None,
+            "source_provenance_checked": verify_sources,
+            "all_smoke_hashes_train_only": True if verify_sources else None, "all_classes_in_each_split": True,
             "test_images_opened": 0, "limitation": LIMITATION}
 
 
@@ -167,5 +170,8 @@ def create_split():
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--create", action="store_true", help="仅首次显式创建，已有目录则拒绝")
+    parser.add_argument("--metadata-only", action="store_true", help="仅校验仓库内清单锁、类别、数量和交集；不声称已检查外部来源或smoke归属")
     args = parser.parse_args()
-    print(json.dumps(create_split() if args.create else verify_split(), ensure_ascii=False, indent=2))
+    if args.create and args.metadata_only:
+        parser.error("--create不能与--metadata-only同时使用")
+    print(json.dumps(create_split() if args.create else verify_split(verify_sources=not args.metadata_only), ensure_ascii=False, indent=2))

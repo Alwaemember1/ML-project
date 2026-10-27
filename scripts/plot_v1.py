@@ -4,7 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
-from train_v1 import draw_curves
+from scripts.train_v1 import draw_curves
 
 
 def main():

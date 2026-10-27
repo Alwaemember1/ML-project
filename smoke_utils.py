@@ -5,14 +5,9 @@ import json
 import os
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
-RUNTIME = ROOT / ".venv" / "smoke_tmp"
-RUNTIME.mkdir(parents=True, exist_ok=True)
-for key in ("TEMP", "TMP", "TMPDIR", "XDG_CACHE_HOME"):
-    os.environ[key] = str(RUNTIME)
-os.environ["CUDA_CACHE_PATH"] = str(RUNTIME / "cuda_cache")
-Path(os.environ["CUDA_CACHE_PATH"]).mkdir(parents=True, exist_ok=True)
-os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
+from project_config import ROOT, RUNTIME, configure_runtime
+
+configure_runtime()
 
 import torch
 from PIL import Image, ImageOps

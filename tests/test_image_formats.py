@@ -1,6 +1,7 @@
 """新增上传格式的真实解码及网页识别检查；只用内存生成的合成图片。"""
 
 import io
+import os
 import unittest
 
 from inference import ALLOWED_FORMATS, InferenceError, ROOT, decode_image
@@ -50,6 +51,8 @@ class ImageFormatTests(unittest.TestCase):
                 with self.assertRaisesRegex(InferenceError, "单帧静态"):
                     decode_image(encoded_image(format_name, animated=True), "animation" + suffix)
 
+    @unittest.skipUnless(os.environ.get("LEAF_RUN_MODEL_TESTS") == "1",
+                         "需显式设置LEAF_RUN_MODEL_TESTS=1且提供冻结权重，默认不运行真实模型测试")
     def test_web_upload_preview_and_real_prediction(self):
         app = AppTest.from_file(str(ROOT / "app.py"), default_timeout=60).run()
         self.assertFalse(app.exception)

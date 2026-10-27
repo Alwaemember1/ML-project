@@ -9,7 +9,7 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 COURSE = ROOT / "reports/course_submission_20261019_v1"
 
 
@@ -25,10 +25,11 @@ def main():
     output = args.output_dir.resolve()
     if not output.is_relative_to(ROOT / "deliverables"):
         raise ValueError("交付副本必须位于本项目deliverables目录")
-    record_file = ROOT / "FINAL_MODEL.json"
+    from project_config import default_record_path, resolve_record_file
+    record_file = default_record_path()
     record = json.loads(record_file.read_text(encoding="utf-8"))
     original_record_hash = sha256(record_file)
-    checkpoint = Path(record["checkpoint"])
+    checkpoint = resolve_record_file(record["checkpoint"], record_file)
     if sha256(checkpoint) != record["checkpoint_sha256"]:
         raise ValueError("冻结模型SHA256不符，停止打包")
     output.mkdir(parents=True, exist_ok=False)
@@ -42,11 +43,12 @@ def main():
         sources[str(target.relative_to(output)).replace("\\", "/")] = sha256(source)
 
     for name in ("app.py", "inference.py", "smoke_utils.py", "class_labels.py", "plant_care.py",
-                 "predict_image.py", "requirements.txt", "requirements-web.txt", "requirements-training.txt",
+                 "predict_image.py", "project_config.py", "requirements.txt", "requirements-web.txt", "requirements-training.txt",
+                 "requirements-cpu.txt", "requirements-gpu.txt",
                  "启动网页.bat", ".streamlit/config.toml"):
         copy(ROOT / name, name)
     copy(checkpoint, "models/final_resnet18.pt")
-    copy(Path(record["evaluation_metrics"]), "results/metrics.json")
+    copy(resolve_record_file(record["evaluation_metrics"], record_file), "results/metrics.json")
     # 只改交付副本中的位置字段；权重、类别、预处理、划分标识及模型SHA保持不变。
     portable = dict(record)
     portable["checkpoint"] = "models/final_resnet18.pt"
@@ -56,6 +58,12 @@ def main():
     # 保留完整实验源码供审查；运行时只需要上面的少量文件。
     for path in sorted(ROOT.glob("*.py")):
         copy(path, f"experiment_source/{path.name}")
+    for folder in ("scripts", "tests"):
+        for path in sorted((ROOT / folder).glob("*.py")):
+            copy(path, f"experiment_source/{folder}/{path.name}")
+    for name in ("LICENSE", "THIRD_PARTY_NOTICES.md"):
+        if (ROOT / name).is_file():
+            copy(ROOT / name, name)
     for name in ("dataset_config.json", "final_test_registry.json", "COURSE_REQUIREMENTS.md", "PROJECT_STATUS.md"):
         copy(ROOT / name, f"experiment_source/{name}")
     for path in sorted((ROOT / "splits/formal_sha256_seed42_v1").glob("*")):

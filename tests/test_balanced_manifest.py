@@ -7,13 +7,15 @@ import unittest
 from pathlib import Path
 
 from balanced_manifest import file_sha256, load_balanced_training
+from project_config import RUNTIME
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 
 
 class BalancedManifestTests(unittest.TestCase):
     def setUp(self):
-        self.temp = tempfile.TemporaryDirectory(dir=ROOT / ".venv" / "smoke_tmp")
+        RUNTIME.mkdir(parents=True, exist_ok=True)
+        self.temp = tempfile.TemporaryDirectory(dir=RUNTIME)
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.source = self.root / "train.csv"

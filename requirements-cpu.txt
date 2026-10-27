@@ -1,0 +1,4 @@
+# CPU PyTorch only. Install requirements-web.txt separately from PyPI.
+--index-url https://download.pytorch.org/whl/cpu
+torch==2.13.0+cpu
+torchvision==0.28.0+cpu

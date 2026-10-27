@@ -14,8 +14,8 @@ from pathlib import Path
 from smoke_utils import (ROOT, build_training_transform, build_transform, image_tensor,
                          preprocessing_info, pretrained_classifier, save_json, seed_torch,
                          sha256_file, tensor_digest)
-from train_smoke import SmokeImages, backbone_state, verify_frozen, run_epoch, CACHED_WEIGHTS
-from prepare_formal_split import SPLIT, LIMITATION, read_rows, verify_split
+from scripts.train_smoke import SmokeImages, backbone_state, verify_frozen, run_epoch, CACHED_WEIGHTS
+from scripts.prepare_formal_split import SPLIT, LIMITATION, read_rows, verify_split
 
 import torch
 import torchvision
@@ -147,7 +147,8 @@ def main():
                   "device": "cuda:0", "gpu": torch.cuda.get_device_name(0), "training_pid": os.getpid(),
                   "started_at": local_time(), "split_id": check["split_id"], "split_directory": str(SPLIT),
                   "source_code_sha256": {name: sha256_file(ROOT / name) for name in
-                                         ("train_v1.py", "smoke_utils.py", "train_smoke.py", "prepare_formal_split.py", "predict_smoke.py")},
+                                         ("scripts/train_v1.py", "smoke_utils.py", "project_config.py", "scripts/train_smoke.py",
+                                          "scripts/prepare_formal_split.py", "scripts/predict_smoke.py")},
                   "purpose": purpose, "balanced_training_view": balance_check,
                   "original_web_model_preserved": web_lock_before,
                   "limitation": LIMITATION, "test_policy": "not loaded or evaluated"}
@@ -156,7 +157,9 @@ def main():
             config["comparison_scope"] = "原固定验证集对照；下采样同时改变训练量和每轮更新次数，不能把差异单独归因于均衡；不看测试、不替换网页"
         (output / "source_snapshot").mkdir()
         for name in config["source_code_sha256"]:
-            (output / "source_snapshot" / name).write_bytes((ROOT / name).read_bytes())
+            target = output / "source_snapshot" / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((ROOT / name).read_bytes())
         save_json(output / "training_config.json", config)
         generator = torch.Generator().manual_seed(42)
         train_loader = DataLoader(SmokeImages(data, train_rows, build_training_transform(info)),

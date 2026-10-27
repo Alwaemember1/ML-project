@@ -36,7 +36,7 @@ def main():
     if checkpoint["model_config"]["num_classes"] != 39:
         raise AssertionError("检查点类别数不是 39")
     if "split_id" in checkpoint:
-        from prepare_formal_split import verify_split, read_rows
+        from scripts.prepare_formal_split import verify_split, read_rows
         split_check = verify_split(Path(checkpoint["split_directory"]))
         if split_check["split_id"] != checkpoint["split_id"] or reference.get("source_split") != "validation":
             raise AssertionError("正式模型只允许用固定验证参考图验收")

@@ -11,12 +11,12 @@ from pathlib import Path
 
 # 此模块先于 Streamlit 导入，复用已有 D 盘缓存和已验证的模型/预处理构造。
 from smoke_utils import ROOT, build_transform, model_for_classes, validate_mapping
+from project_config import FROZEN_SHA256, default_record_path, resolve_record_file as resolve_config_file
 
 import torch
 from PIL import Image, ImageOps, UnidentifiedImageError
 
-FINAL_RECORD = ROOT / "FINAL_MODEL.json"
-FROZEN_SHA256 = "1c464873a01b10e1dce89211859a0a9bfe1448a765ecfaef4ed57089436c6b2f"
+FINAL_RECORD = default_record_path()
 MAX_FILE_BYTES = 10 * 1024 * 1024
 MAX_IMAGE_PIXELS = 20_000_000
 ALLOWED_FORMATS = {
@@ -43,8 +43,7 @@ def read_final_record(path=FINAL_RECORD):
 
 def resolve_record_file(value, record_path=FINAL_RECORD):
     """交付包支持相对冻结记录的路径；原项目已有绝对路径保持不变。"""
-    path = Path(value)
-    return path if path.is_absolute() else Path(record_path).resolve().parent / path
+    return resolve_config_file(value, record_path)
 
 
 def model_cache_key(record_path=FINAL_RECORD):

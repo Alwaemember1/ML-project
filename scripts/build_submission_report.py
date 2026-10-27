@@ -14,7 +14,7 @@ from zoneinfo import ZoneInfo
 from class_labels import category_kind, display_name
 from plant_care import RISK_SCOPE, SEVERITY_SCOPE, USE_SCOPE, care_for_class, validate_coverage
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 BALANCED = ROOT / "reports/balanced_head_20261018_200208_701758"
 COURSE = ROOT / "reports/course_completion_20261018_193414_578564"
 GOVERNANCE = ROOT / "reports/check_20261016_133031_170321"

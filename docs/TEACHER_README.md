@@ -17,18 +17,19 @@ New-Item -ItemType Directory -Force $env:TEMP | Out-Null
 $env:TMP = $env:TEMP
 $env:TMPDIR = $env:TEMP
 $env:PIP_CACHE_DIR = "$PWD\.venv\pip_cache"
-& '.\.venv\Scripts\python.exe' -m pip install -r requirements-training.txt
+& '.\.venv\Scripts\python.exe' -m pip install -r requirements-gpu.txt
 & '.\.venv\Scripts\python.exe' -m pip install -r requirements-web.txt
 & '.\启动网页.bat'
 ```
 
-当前依赖使用已验证的CUDA构建，优先GPU，CUDA不可用时预测代码可自动选择CPU；CPU推理流程在项目环境中验证过。首次安装可能需要较大的下载空间，建议答辩前在目标机器完成环境准备。本轮没有在另一台电脑重新安装并验收环境。
+上例使用已验证的CUDA构建，优先GPU，CUDA不可用时预测代码可自动选择CPU；没有NVIDIA显卡时可把requirements-gpu.txt换成requirements-cpu.txt。CPU推理流程在原项目环境中验证过，独立CPU版wheel安装未在本轮新建环境验收。首次安装可能需要较大的下载空间，建议答辩前在目标机器完成环境准备。
 
 前台窗口Ctrl+C停止，若询问是否终止批处理则输入Y。端口已有服务时先确认地址，不重复启动或结束其他程序。
 
 ## 文件说明
 
 - 根目录Python文件：网页、共用推理、类别展示和参考资料。
+- project_config.py：本地配置与运行目录；开源仓库中的命令行工具位于scripts/，测试位于tests/。
 - `models/final_resnet18.pt`：唯一演示模型，SHA256为 `1c464873a01b10e1dce89211859a0a9bfe1448a765ecfaef4ed57089436c6b2f`。
 - `FINAL_MODEL.json`：交付副本，模型与指标使用相对路径；类别、预处理、轮次、划分标识及模型SHA与原记录一致。
 - `results/metrics.json`：原最终测试的真实指标，页面仅展示，不重新评价数据。

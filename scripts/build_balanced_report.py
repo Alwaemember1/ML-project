@@ -37,7 +37,7 @@ def main():
         raise AssertionError("实验超出验证对照范围")
     if any(before[key] != after[key] for key in before):
         raise AssertionError("冻结网页模型变化")
-    root = Path(__file__).resolve().parent
+    root = Path(__file__).resolve().parents[1]
     if file_sha256(root / "FINAL_MODEL.json") != before["record_sha256"]:
         raise AssertionError("冻结记录变化")
     if file_sha256(before["checkpoint"]) != before["checkpoint_sha256"]:
