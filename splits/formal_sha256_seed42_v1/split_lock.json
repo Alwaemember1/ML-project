@@ -1,0 +1,12 @@
+{
+  "split_id": "553a89fd302dd00cf3abc2e8554151a66a053dcc0edec0d9fc4ee82159a4f8d8",
+  "artifact_sha256": {
+    "train.csv": "26fe2dfa60b0cdb43799a4aae029acaacc1df25b898c0b449a630d419db85d1a",
+    "validation.csv": "18f0b893462eca0855616b0b82150aa76a0f062f84bf4a3db2eb4055c0d3ec5f",
+    "test.csv": "14756385e32ee572fe47cbca68e9000bcdb4e8200078327fb30a884aa357e86e",
+    "class_counts.csv": "607876816b7b97814eb59517fbb76878531b6521cd2ec32b6f1be4fee338d837",
+    "class_to_idx.json": "fd2e73ad37706317b334ddb3822581879b71e578de9ba8124964397d895a2295",
+    "split_config.json": "9db56d2ac8a1ae5efe3b0a9ed7470c8911c2b43fcc874f86fb9cd375098794fc"
+  },
+  "policy": "拒绝覆盖；训练前校验文件和来源哈希；不静默重建"
+}

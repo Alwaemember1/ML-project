@@ -1,0 +1,8 @@
+{
+  "registered_at": "2026-10-17T12:19:54.272804+08:00",
+  "checkpoint": "D:\\PythonProject3\\reports\\v1_head_20261017_102902_302541\\checkpoints\\best_epoch_003.pt",
+  "checkpoint_sha256": "1c464873a01b10e1dce89211859a0a9bfe1448a765ecfaef4ed57089436c6b2f",
+  "split_id": "553a89fd302dd00cf3abc2e8554151a66a053dcc0edec0d9fc4ee82159a4f8d8",
+  "evaluation_dir": "D:\\PythonProject3\\reports\\final_test_20261017_121954_264063",
+  "policy": "测试已登记；禁止因模型表现反复评价或调参，真实实现错误需明确原因另存结果"
+}

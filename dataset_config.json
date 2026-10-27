@@ -1,0 +1,5 @@
+{
+  "dataset_root": "Plant_leave_diseases_dataset_with_augmentation",
+  "output_root": "reports",
+  "sample_seed": 42
+}

@@ -1,0 +1,190 @@
+﻿true_idx,true_class,pred_idx,pred_class,count,true_support,fraction_of_true_class,fraction_of_source_errors
+34,Tomato___Spider_mites Two-spotted_spider_mite,38,Tomato___healthy,35,251,0.1394422310756972,0.35353535353535354
+34,Tomato___Spider_mites Two-spotted_spider_mite,35,Tomato___Target_Spot,33,251,0.13147410358565736,0.3333333333333333
+22,Potato___Late_blight,31,Tomato___Late_blight,32,150,0.21333333333333335,0.47058823529411764
+35,Tomato___Target_Spot,38,Tomato___healthy,23,211,0.10900473933649289,0.38333333333333336
+8,Corn___Cercospora_leaf_spot Gray_leaf_spot,10,Corn___Northern_Leaf_Blight,16,150,0.10666666666666667,1.0
+12,Grape___Black_rot,13,Grape___Esca_(Black_Measles),14,177,0.07909604519774012,0.8235294117647058
+31,Tomato___Late_blight,30,Tomato___Early_blight,14,285,0.04912280701754386,0.56
+30,Tomato___Early_blight,31,Tomato___Late_blight,12,150,0.08,0.36363636363636365
+33,Tomato___Septoria_leaf_spot,30,Tomato___Early_blight,11,266,0.041353383458646614,0.24444444444444444
+35,Tomato___Target_Spot,30,Tomato___Early_blight,11,211,0.052132701421800945,0.18333333333333332
+10,Corn___Northern_Leaf_Blight,8,Corn___Cercospora_leaf_spot Gray_leaf_spot,10,150,0.06666666666666667,0.9090909090909091
+36,Tomato___Tomato_Yellow_Leaf_Curl_Virus,29,Tomato___Bacterial_spot,10,804,0.012437810945273632,0.22727272727272727
+29,Tomato___Bacterial_spot,17,Peach___Bacterial_spot,8,319,0.025078369905956112,0.22857142857142856
+34,Tomato___Spider_mites Two-spotted_spider_mite,30,Tomato___Early_blight,8,251,0.03187250996015936,0.08080808080808081
+32,Tomato___Leaf_Mold,33,Tomato___Septoria_leaf_spot,7,150,0.04666666666666667,0.22580645161290322
+34,Tomato___Spider_mites Two-spotted_spider_mite,33,Tomato___Septoria_leaf_spot,7,251,0.027888446215139442,0.0707070707070707
+36,Tomato___Tomato_Yellow_Leaf_Curl_Virus,16,Orange___Haunglongbing_(Citrus_greening),7,804,0.008706467661691543,0.1590909090909091
+36,Tomato___Tomato_Yellow_Leaf_Curl_Virus,37,Tomato___Tomato_mosaic_virus,7,804,0.008706467661691543,0.1590909090909091
+18,Peach___healthy,17,Peach___Bacterial_spot,6,150,0.04,0.8571428571428571
+22,Potato___Late_blight,17,Peach___Bacterial_spot,6,150,0.04,0.08823529411764706
+29,Tomato___Bacterial_spot,33,Tomato___Septoria_leaf_spot,6,319,0.018808777429467086,0.17142857142857143
+30,Tomato___Early_blight,33,Tomato___Septoria_leaf_spot,6,150,0.04,0.18181818181818182
+32,Tomato___Leaf_Mold,31,Tomato___Late_blight,6,150,0.04,0.1935483870967742
+35,Tomato___Target_Spot,33,Tomato___Septoria_leaf_spot,6,211,0.02843601895734597,0.1
+36,Tomato___Tomato_Yellow_Leaf_Curl_Virus,31,Tomato___Late_blight,6,804,0.007462686567164179,0.13636363636363635
+0,Apple___Apple_scab,1,Apple___Black_rot,5,150,0.03333333333333333,0.5555555555555556
+20,"Pepper,_bell___healthy",16,Orange___Haunglongbing_(Citrus_greening),5,222,0.02252252252252252,0.5
+22,Potato___Late_blight,19,"Pepper,_bell___Bacterial_spot",5,150,0.03333333333333333,0.07352941176470588
+22,Potato___Late_blight,21,Potato___Early_blight,5,150,0.03333333333333333,0.07352941176470588
+29,Tomato___Bacterial_spot,31,Tomato___Late_blight,5,319,0.01567398119122257,0.14285714285714285
+32,Tomato___Leaf_Mold,17,Peach___Bacterial_spot,5,150,0.03333333333333333,0.16129032258064516
+33,Tomato___Septoria_leaf_spot,17,Peach___Bacterial_spot,5,266,0.018796992481203006,0.1111111111111111
+33,Tomato___Septoria_leaf_spot,29,Tomato___Bacterial_spot,5,266,0.018796992481203006,0.1111111111111111
+36,Tomato___Tomato_Yellow_Leaf_Curl_Virus,30,Tomato___Early_blight,5,804,0.006218905472636816,0.11363636363636363
+2,Apple___Cedar_apple_rust,0,Apple___Apple_scab,4,125,0.032,0.4444444444444444
+19,"Pepper,_bell___Bacterial_spot",16,Orange___Haunglongbing_(Citrus_greening),4,150,0.02666666666666667,0.3333333333333333
+19,"Pepper,_bell___Bacterial_spot",17,Peach___Bacterial_spot,4,150,0.02666666666666667,0.3333333333333333
+22,Potato___Late_blight,23,Potato___healthy,4,150,0.02666666666666667,0.058823529411764705
+25,Soybean___healthy,3,Apple___healthy,4,764,0.005235602094240838,0.2857142857142857
+25,Soybean___healthy,16,Orange___Haunglongbing_(Citrus_greening),4,764,0.005235602094240838,0.2857142857142857
+29,Tomato___Bacterial_spot,30,Tomato___Early_blight,4,319,0.012539184952978056,0.11428571428571428
+29,Tomato___Bacterial_spot,36,Tomato___Tomato_Yellow_Leaf_Curl_Virus,4,319,0.012539184952978056,0.11428571428571428
+30,Tomato___Early_blight,29,Tomato___Bacterial_spot,4,150,0.02666666666666667,0.12121212121212122
+31,Tomato___Late_blight,16,Orange___Haunglongbing_(Citrus_greening),4,285,0.014035087719298246,0.16
+32,Tomato___Leaf_Mold,37,Tomato___Tomato_mosaic_virus,4,150,0.02666666666666667,0.12903225806451613
+33,Tomato___Septoria_leaf_spot,31,Tomato___Late_blight,4,266,0.015037593984962405,0.08888888888888889
+33,Tomato___Septoria_leaf_spot,38,Tomato___healthy,4,266,0.015037593984962405,0.08888888888888889
+34,Tomato___Spider_mites Two-spotted_spider_mite,31,Tomato___Late_blight,4,251,0.01593625498007968,0.04040404040404041
+35,Tomato___Target_Spot,3,Apple___healthy,4,211,0.018957345971563982,0.06666666666666667
+35,Tomato___Target_Spot,34,Tomato___Spider_mites Two-spotted_spider_mite,4,211,0.018957345971563982,0.06666666666666667
+36,Tomato___Tomato_Yellow_Leaf_Curl_Virus,19,"Pepper,_bell___Bacterial_spot",4,804,0.004975124378109453,0.09090909090909091
+1,Apple___Black_rot,17,Peach___Bacterial_spot,3,147,0.02040816326530612,0.375
+9,Corn___Common_rust,10,Corn___Northern_Leaf_Blight,3,179,0.01675977653631285,1.0
+12,Grape___Black_rot,14,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),3,177,0.01694915254237288,0.17647058823529413
+20,"Pepper,_bell___healthy",19,"Pepper,_bell___Bacterial_spot",3,222,0.013513513513513514,0.3
+21,Potato___Early_blight,0,Apple___Apple_scab,3,150,0.02,0.23076923076923078
+22,Potato___Late_blight,16,Orange___Haunglongbing_(Citrus_greening),3,150,0.02,0.04411764705882353
+22,Potato___Late_blight,30,Tomato___Early_blight,3,150,0.02,0.04411764705882353
+25,Soybean___healthy,20,"Pepper,_bell___healthy",3,764,0.003926701570680628,0.21428571428571427
+28,Strawberry___healthy,0,Apple___Apple_scab,3,150,0.02,0.75
+30,Tomato___Early_blight,35,Tomato___Target_Spot,3,150,0.02,0.09090909090909091
+30,Tomato___Early_blight,38,Tomato___healthy,3,150,0.02,0.09090909090909091
+32,Tomato___Leaf_Mold,30,Tomato___Early_blight,3,150,0.02,0.0967741935483871
+33,Tomato___Septoria_leaf_spot,35,Tomato___Target_Spot,3,266,0.011278195488721804,0.06666666666666667
+34,Tomato___Spider_mites Two-spotted_spider_mite,24,Raspberry___healthy,3,251,0.01195219123505976,0.030303030303030304
+35,Tomato___Target_Spot,29,Tomato___Bacterial_spot,3,211,0.014218009478672985,0.05
+0,Apple___Apple_scab,31,Tomato___Late_blight,2,150,0.013333333333333334,0.2222222222222222
+1,Apple___Black_rot,7,Cherry___healthy,2,147,0.013605442176870748,0.25
+1,Apple___Black_rot,19,"Pepper,_bell___Bacterial_spot",2,147,0.013605442176870748,0.25
+2,Apple___Cedar_apple_rust,17,Peach___Bacterial_spot,2,125,0.016,0.2222222222222222
+4,Background_without_leaves,27,Strawberry___Leaf_scorch,2,171,0.011695906432748537,0.6666666666666666
+5,Blueberry___healthy,16,Orange___Haunglongbing_(Citrus_greening),2,225,0.008888888888888889,0.2857142857142857
+5,Blueberry___healthy,25,Soybean___healthy,2,225,0.008888888888888889,0.2857142857142857
+6,Cherry___Powdery_mildew,3,Apple___healthy,2,158,0.012658227848101266,0.2857142857142857
+7,Cherry___healthy,0,Apple___Apple_scab,2,150,0.013333333333333334,0.4
+7,Cherry___healthy,25,Soybean___healthy,2,150,0.013333333333333334,0.4
+14,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),17,Peach___Bacterial_spot,2,161,0.012422360248447204,0.6666666666666666
+19,"Pepper,_bell___Bacterial_spot",30,Tomato___Early_blight,2,150,0.013333333333333334,0.16666666666666666
+20,"Pepper,_bell___healthy",25,Soybean___healthy,2,222,0.009009009009009009,0.2
+21,Potato___Early_blight,17,Peach___Bacterial_spot,2,150,0.013333333333333334,0.15384615384615385
+21,Potato___Early_blight,33,Tomato___Septoria_leaf_spot,2,150,0.013333333333333334,0.15384615384615385
+22,Potato___Late_blight,0,Apple___Apple_scab,2,150,0.013333333333333334,0.029411764705882353
+22,Potato___Late_blight,1,Apple___Black_rot,2,150,0.013333333333333334,0.029411764705882353
+22,Potato___Late_blight,10,Corn___Northern_Leaf_Blight,2,150,0.013333333333333334,0.029411764705882353
+24,Raspberry___healthy,28,Strawberry___healthy,2,150,0.013333333333333334,0.6666666666666666
+25,Soybean___healthy,23,Potato___healthy,2,764,0.002617801047120419,0.14285714285714285
+29,Tomato___Bacterial_spot,3,Apple___healthy,2,319,0.006269592476489028,0.05714285714285714
+30,Tomato___Early_blight,19,"Pepper,_bell___Bacterial_spot",2,150,0.013333333333333334,0.06060606060606061
+30,Tomato___Early_blight,27,Strawberry___Leaf_scorch,2,150,0.013333333333333334,0.06060606060606061
+32,Tomato___Leaf_Mold,34,Tomato___Spider_mites Two-spotted_spider_mite,2,150,0.013333333333333334,0.06451612903225806
+32,Tomato___Leaf_Mold,35,Tomato___Target_Spot,2,150,0.013333333333333334,0.06451612903225806
+33,Tomato___Septoria_leaf_spot,0,Apple___Apple_scab,2,266,0.007518796992481203,0.044444444444444446
+33,Tomato___Septoria_leaf_spot,19,"Pepper,_bell___Bacterial_spot",2,266,0.007518796992481203,0.044444444444444446
+33,Tomato___Septoria_leaf_spot,20,"Pepper,_bell___healthy",2,266,0.007518796992481203,0.044444444444444446
+33,Tomato___Septoria_leaf_spot,26,Squash___Powdery_mildew,2,266,0.007518796992481203,0.044444444444444446
+34,Tomato___Spider_mites Two-spotted_spider_mite,19,"Pepper,_bell___Bacterial_spot",2,251,0.00796812749003984,0.020202020202020204
+34,Tomato___Spider_mites Two-spotted_spider_mite,29,Tomato___Bacterial_spot,2,251,0.00796812749003984,0.020202020202020204
+34,Tomato___Spider_mites Two-spotted_spider_mite,37,Tomato___Tomato_mosaic_virus,2,251,0.00796812749003984,0.020202020202020204
+35,Tomato___Target_Spot,17,Peach___Bacterial_spot,2,211,0.009478672985781991,0.03333333333333333
+35,Tomato___Target_Spot,19,"Pepper,_bell___Bacterial_spot",2,211,0.009478672985781991,0.03333333333333333
+36,Tomato___Tomato_Yellow_Leaf_Curl_Virus,35,Tomato___Target_Spot,2,804,0.0024875621890547263,0.045454545454545456
+37,Tomato___Tomato_mosaic_virus,32,Tomato___Leaf_Mold,2,150,0.013333333333333334,0.3333333333333333
+38,Tomato___healthy,26,Squash___Powdery_mildew,2,238,0.008403361344537815,0.3333333333333333
+0,Apple___Apple_scab,2,Apple___Cedar_apple_rust,1,150,0.006666666666666667,0.1111111111111111
+0,Apple___Apple_scab,17,Peach___Bacterial_spot,1,150,0.006666666666666667,0.1111111111111111
+1,Apple___Black_rot,0,Apple___Apple_scab,1,147,0.006802721088435374,0.125
+2,Apple___Cedar_apple_rust,3,Apple___healthy,1,125,0.008,0.1111111111111111
+2,Apple___Cedar_apple_rust,16,Orange___Haunglongbing_(Citrus_greening),1,125,0.008,0.1111111111111111
+2,Apple___Cedar_apple_rust,29,Tomato___Bacterial_spot,1,125,0.008,0.1111111111111111
+3,Apple___healthy,5,Blueberry___healthy,1,246,0.0040650406504065045,0.3333333333333333
+3,Apple___healthy,17,Peach___Bacterial_spot,1,246,0.0040650406504065045,0.3333333333333333
+3,Apple___healthy,18,Peach___healthy,1,246,0.0040650406504065045,0.3333333333333333
+4,Background_without_leaves,31,Tomato___Late_blight,1,171,0.005847953216374269,0.3333333333333333
+5,Blueberry___healthy,1,Apple___Black_rot,1,225,0.0044444444444444444,0.14285714285714285
+5,Blueberry___healthy,3,Apple___healthy,1,225,0.0044444444444444444,0.14285714285714285
+5,Blueberry___healthy,20,"Pepper,_bell___healthy",1,225,0.0044444444444444444,0.14285714285714285
+6,Cherry___Powdery_mildew,8,Corn___Cercospora_leaf_spot Gray_leaf_spot,1,158,0.006329113924050633,0.14285714285714285
+6,Cherry___Powdery_mildew,16,Orange___Haunglongbing_(Citrus_greening),1,158,0.006329113924050633,0.14285714285714285
+6,Cherry___Powdery_mildew,17,Peach___Bacterial_spot,1,158,0.006329113924050633,0.14285714285714285
+6,Cherry___Powdery_mildew,18,Peach___healthy,1,158,0.006329113924050633,0.14285714285714285
+6,Cherry___Powdery_mildew,31,Tomato___Late_blight,1,158,0.006329113924050633,0.14285714285714285
+7,Cherry___healthy,16,Orange___Haunglongbing_(Citrus_greening),1,150,0.006666666666666667,0.2
+10,Corn___Northern_Leaf_Blight,31,Tomato___Late_blight,1,150,0.006666666666666667,0.09090909090909091
+14,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),27,Strawberry___Leaf_scorch,1,161,0.006211180124223602,0.3333333333333333
+15,Grape___healthy,0,Apple___Apple_scab,1,150,0.006666666666666667,1.0
+16,Orange___Haunglongbing_(Citrus_greening),29,Tomato___Bacterial_spot,1,826,0.0012106537530266344,1.0
+17,Peach___Bacterial_spot,10,Corn___Northern_Leaf_Blight,1,345,0.002898550724637681,1.0
+18,Peach___healthy,1,Apple___Black_rot,1,150,0.006666666666666667,0.14285714285714285
+19,"Pepper,_bell___Bacterial_spot",0,Apple___Apple_scab,1,150,0.006666666666666667,0.08333333333333333
+19,"Pepper,_bell___Bacterial_spot",20,"Pepper,_bell___healthy",1,150,0.006666666666666667,0.08333333333333333
+21,Potato___Early_blight,1,Apple___Black_rot,1,150,0.006666666666666667,0.07692307692307693
+21,Potato___Early_blight,14,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),1,150,0.006666666666666667,0.07692307692307693
+21,Potato___Early_blight,19,"Pepper,_bell___Bacterial_spot",1,150,0.006666666666666667,0.07692307692307693
+21,Potato___Early_blight,27,Strawberry___Leaf_scorch,1,150,0.006666666666666667,0.07692307692307693
+21,Potato___Early_blight,30,Tomato___Early_blight,1,150,0.006666666666666667,0.07692307692307693
+21,Potato___Early_blight,31,Tomato___Late_blight,1,150,0.006666666666666667,0.07692307692307693
+22,Potato___Late_blight,3,Apple___healthy,1,150,0.006666666666666667,0.014705882352941176
+22,Potato___Late_blight,14,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),1,150,0.006666666666666667,0.014705882352941176
+22,Potato___Late_blight,25,Soybean___healthy,1,150,0.006666666666666667,0.014705882352941176
+22,Potato___Late_blight,27,Strawberry___Leaf_scorch,1,150,0.006666666666666667,0.014705882352941176
+23,Potato___healthy,0,Apple___Apple_scab,1,150,0.006666666666666667,0.25
+23,Potato___healthy,18,Peach___healthy,1,150,0.006666666666666667,0.25
+23,Potato___healthy,25,Soybean___healthy,1,150,0.006666666666666667,0.25
+23,Potato___healthy,38,Tomato___healthy,1,150,0.006666666666666667,0.25
+24,Raspberry___healthy,3,Apple___healthy,1,150,0.006666666666666667,0.3333333333333333
+25,Soybean___healthy,0,Apple___Apple_scab,1,764,0.0013089005235602095,0.07142857142857142
+27,Strawberry___Leaf_scorch,8,Corn___Cercospora_leaf_spot Gray_leaf_spot,1,166,0.006024096385542169,0.5
+27,Strawberry___Leaf_scorch,14,Grape___Leaf_blight_(Isariopsis_Leaf_Spot),1,166,0.006024096385542169,0.5
+28,Strawberry___healthy,1,Apple___Black_rot,1,150,0.006666666666666667,0.25
+29,Tomato___Bacterial_spot,2,Apple___Cedar_apple_rust,1,319,0.003134796238244514,0.02857142857142857
+29,Tomato___Bacterial_spot,8,Corn___Cercospora_leaf_spot Gray_leaf_spot,1,319,0.003134796238244514,0.02857142857142857
+29,Tomato___Bacterial_spot,16,Orange___Haunglongbing_(Citrus_greening),1,319,0.003134796238244514,0.02857142857142857
+29,Tomato___Bacterial_spot,25,Soybean___healthy,1,319,0.003134796238244514,0.02857142857142857
+29,Tomato___Bacterial_spot,34,Tomato___Spider_mites Two-spotted_spider_mite,1,319,0.003134796238244514,0.02857142857142857
+29,Tomato___Bacterial_spot,35,Tomato___Target_Spot,1,319,0.003134796238244514,0.02857142857142857
+30,Tomato___Early_blight,17,Peach___Bacterial_spot,1,150,0.006666666666666667,0.030303030303030304
+31,Tomato___Late_blight,0,Apple___Apple_scab,1,285,0.0035087719298245615,0.04
+31,Tomato___Late_blight,9,Corn___Common_rust,1,285,0.0035087719298245615,0.04
+31,Tomato___Late_blight,28,Strawberry___healthy,1,285,0.0035087719298245615,0.04
+31,Tomato___Late_blight,33,Tomato___Septoria_leaf_spot,1,285,0.0035087719298245615,0.04
+31,Tomato___Late_blight,35,Tomato___Target_Spot,1,285,0.0035087719298245615,0.04
+31,Tomato___Late_blight,37,Tomato___Tomato_mosaic_virus,1,285,0.0035087719298245615,0.04
+31,Tomato___Late_blight,38,Tomato___healthy,1,285,0.0035087719298245615,0.04
+32,Tomato___Leaf_Mold,0,Apple___Apple_scab,1,150,0.006666666666666667,0.03225806451612903
+32,Tomato___Leaf_Mold,38,Tomato___healthy,1,150,0.006666666666666667,0.03225806451612903
+33,Tomato___Septoria_leaf_spot,1,Apple___Black_rot,1,266,0.0037593984962406013,0.022222222222222223
+33,Tomato___Septoria_leaf_spot,3,Apple___healthy,1,266,0.0037593984962406013,0.022222222222222223
+33,Tomato___Septoria_leaf_spot,13,Grape___Esca_(Black_Measles),1,266,0.0037593984962406013,0.022222222222222223
+33,Tomato___Septoria_leaf_spot,21,Potato___Early_blight,1,266,0.0037593984962406013,0.022222222222222223
+33,Tomato___Septoria_leaf_spot,28,Strawberry___healthy,1,266,0.0037593984962406013,0.022222222222222223
+34,Tomato___Spider_mites Two-spotted_spider_mite,3,Apple___healthy,1,251,0.00398406374501992,0.010101010101010102
+34,Tomato___Spider_mites Two-spotted_spider_mite,20,"Pepper,_bell___healthy",1,251,0.00398406374501992,0.010101010101010102
+34,Tomato___Spider_mites Two-spotted_spider_mite,25,Soybean___healthy,1,251,0.00398406374501992,0.010101010101010102
+35,Tomato___Target_Spot,1,Apple___Black_rot,1,211,0.004739336492890996,0.016666666666666666
+35,Tomato___Target_Spot,20,"Pepper,_bell___healthy",1,211,0.004739336492890996,0.016666666666666666
+35,Tomato___Target_Spot,25,Soybean___healthy,1,211,0.004739336492890996,0.016666666666666666
+35,Tomato___Target_Spot,28,Strawberry___healthy,1,211,0.004739336492890996,0.016666666666666666
+35,Tomato___Target_Spot,31,Tomato___Late_blight,1,211,0.004739336492890996,0.016666666666666666
+36,Tomato___Tomato_Yellow_Leaf_Curl_Virus,20,"Pepper,_bell___healthy",1,804,0.0012437810945273632,0.022727272727272728
+36,Tomato___Tomato_Yellow_Leaf_Curl_Virus,34,Tomato___Spider_mites Two-spotted_spider_mite,1,804,0.0012437810945273632,0.022727272727272728
+36,Tomato___Tomato_Yellow_Leaf_Curl_Virus,38,Tomato___healthy,1,804,0.0012437810945273632,0.022727272727272728
+37,Tomato___Tomato_mosaic_virus,30,Tomato___Early_blight,1,150,0.006666666666666667,0.16666666666666666
+37,Tomato___Tomato_mosaic_virus,31,Tomato___Late_blight,1,150,0.006666666666666667,0.16666666666666666
+37,Tomato___Tomato_mosaic_virus,33,Tomato___Septoria_leaf_spot,1,150,0.006666666666666667,0.16666666666666666
+37,Tomato___Tomato_mosaic_virus,35,Tomato___Target_Spot,1,150,0.006666666666666667,0.16666666666666666
+38,Tomato___healthy,28,Strawberry___healthy,1,238,0.004201680672268907,0.16666666666666666
+38,Tomato___healthy,30,Tomato___Early_blight,1,238,0.004201680672268907,0.16666666666666666
+38,Tomato___healthy,33,Tomato___Septoria_leaf_spot,1,238,0.004201680672268907,0.16666666666666666
+38,Tomato___healthy,35,Tomato___Target_Spot,1,238,0.004201680672268907,0.16666666666666666

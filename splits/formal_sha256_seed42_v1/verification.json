@@ -1,0 +1,27 @@
+{
+  "split_id": "553a89fd302dd00cf3abc2e8554151a66a053dcc0edec0d9fc4ee82159a4f8d8",
+  "counts": {
+    "train": 42890,
+    "validation": 9192,
+    "test": 9192
+  },
+  "overlaps": {
+    "train_validation": {
+      "paths": 0,
+      "sha256": 0
+    },
+    "train_test": {
+      "paths": 0,
+      "sha256": 0
+    },
+    "validation_test": {
+      "paths": 0,
+      "sha256": 0
+    }
+  },
+  "smoke_unique_hashes": 1170,
+  "all_smoke_hashes_train_only": true,
+  "all_classes_in_each_split": true,
+  "test_images_opened": 0,
+  "limitation": "仅排除已知字节重复；增强同源关系未排除，不能宣称无增强同源泄漏。"
+}

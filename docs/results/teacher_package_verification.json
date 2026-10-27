@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "unit_tests_passed": 15,
+  "package_independent_process_cpu_prediction": true,
+  "synthetic_image_only": true,
+  "original_dataset_images_opened": 0,
+  "output_shape": [
+    1,
+    39
+  ],
+  "all39_probabilities_identical": true,
+  "top3_identical": true,
+  "package_apptest_initial_page": true,
+  "real_test_metrics_displayed": true,
+  "new_environment_installation_tested": false,
+  "model_retrained_or_test_reevaluated": false
+}

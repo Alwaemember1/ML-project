@@ -1,0 +1,6 @@
+# 第一阶段依赖保持在原 requirements.txt；这里增加已解析兼容的 GPU 依赖。
+# 使用项目 .venv 的 python -m pip install -r requirements-training.txt。
+--index-url https://download.pytorch.org/whl/cu130
+-r requirements.txt
+torch==2.13.0+cu130
+torchvision==0.28.0+cu130

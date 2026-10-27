@@ -1,0 +1,2 @@
+# 第一阶段只需要图片读取库；后续再配置 PyTorch、torchvision、Streamlit。
+Pillow==12.3.0

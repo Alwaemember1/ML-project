@@ -1,0 +1,33 @@
+{
+  "version": "formal_sha256_seed42_v1",
+  "seed": 42,
+  "dataset_root": "D:\\PythonProject3\\Plant_leave_diseases_dataset_with_augmentation",
+  "class_count": 39,
+  "original_files": 61486,
+  "unique_representatives": 61274,
+  "excluded_byte_copies": 212,
+  "representative_rule": "每种 SHA256 取相对路径字典序最小者",
+  "ratios": {
+    "train": 0.7,
+    "validation": 0.15,
+    "test": 0.15
+  },
+  "rounding": "每类 val=test=整数四舍五入(15%×该类哈希数)，其余训练",
+  "smoke_rule": "所有 smoke 使用过的哈希（含其副本）仅允许归属正式训练集",
+  "smoke_manifests": [
+    "D:\\PythonProject3\\reports\\smoke_20261016_233341_912439\\smoke_train.csv",
+    "D:\\PythonProject3\\reports\\smoke_20261016_233341_912439\\smoke_validation.csv"
+  ],
+  "smoke_rows": 1170,
+  "smoke_unique_hashes": 1170,
+  "source_sha256": {
+    "D:\\PythonProject3\\reports\\check_20261016_133031_170321\\image_manifest.csv": "d4edb292d69d27b5aaec980ba1bda7290936181164c2e6fc9be015c447818d73",
+    "D:\\PythonProject3\\reports\\check_20261016_133031_170321\\class_to_idx.json": "fd2e73ad37706317b334ddb3822581879b71e578de9ba8124964397d895a2295",
+    "D:\\PythonProject3\\reports\\pretrain_20261016_230415\\sha256_manifest.csv": "1c6a38595804dbfd0fb01d5d56a710e921d26a8c5e90adcb5bebed747e2c284c",
+    "D:\\PythonProject3\\dataset_config.json": "f3b39c3aa21cd78027602d8067bac0bfd8f58cb45d3e33473d863bc47e7ab6ea",
+    "D:\\PythonProject3\\reports\\smoke_20261016_233341_912439\\smoke_train.csv": "f9e230f0ef9300d4c0a362e15540ba84a9bc477eee5819fa3608870dc3286e7c",
+    "D:\\PythonProject3\\reports\\smoke_20261016_233341_912439\\smoke_validation.csv": "6351bc3bc629b60e88a7c9d61cc3be01beb76e65da98388e5db488ee237856a1"
+  },
+  "limitation": "仅排除已知字节重复；增强同源关系未排除，不能宣称无增强同源泄漏。",
+  "test_policy": "仅保存和核对元数据；不读测试图片、不选模、不调参、不挑演示图"
+}

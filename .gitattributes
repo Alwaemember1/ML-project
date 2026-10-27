@@ -1,0 +1,15 @@
+* text=auto
+.gitattributes text eol=lf
+.gitignore text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.toml text eol=lf
+*.txt text eol=lf
+*.csv -text whitespace=cr-at-eol
+*.bat text eol=crlf
+*.png binary
+*.jpg binary
+*.pt binary
+# Fixed split locks hash file bytes, including JSON line endings.
+splits/** -text whitespace=cr-at-eol

@@ -1,0 +1,4 @@
+# 现有 torch / torchvision 保持 requirements-training.txt 中的已验证版本。
+# 此文件使用普通 PyPI，不继承 PyTorch 专用下载索引。
+-r requirements.txt
+streamlit==1.66.0
