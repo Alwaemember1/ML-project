@@ -1,5 +1,13 @@
 # 项目状态：课程报告与演示资料已整理，原网页模型继续冻结
 
+## 交付版启动环境修复 2026年10月27日
+
+用户在teacher_demo_20261027_v1中遇到“Project Python was not found”。原因是交付ZIP不含虚拟环境，而旧启动器仅查找包内.venv，没有复用本机已有的原项目环境。
+
+已修复启动器：优先包内.venv；包位于原项目deliverables/包名/下且上两级有原项目FINAL_MODEL.json时，回退到上两级原项目.venv。缺少两种环境时明确说明首次安装步骤在README，不自动安装或修改系统环境。原项目根目录入口仍优先自己的.venv。已更新原v1运行目录的启动文件和README及对应清单项，旧文件备份在reports/launcher_environment_fix_20261027，原v1 ZIP保留不覆盖，后续交付使用新v2 ZIP。
+
+实际通过CMD执行用户原交付路径：包内Python不存在，成功复用原项目环境，HTTP健康响应200/ok；独立临时目录无环境时正确返回退出码1并提示README安装步骤。未训练、未重新评价测试集、未安装环境或修改模型。记录见reports/launcher_environment_fix_20261027/verification.json。本机网页已启动于http://127.0.0.1:8601，PID会随启动变化；未宣称在老师另一台电脑新安装并验收环境。
+
 ## 源码仓库与老师演示包 2026年10月27日
 
 本轮目标仓库为 https://gitee.com/warr46ant/ml-project.git ，只读检查时没有已有远端分支。本地原仓库尚无提交，保留用户现有8601端口配置，准备main源码提交。数据集、权重、.venv、IDE/工具状态、缓存及本地交付ZIP由.gitignore排除；固定划分元数据保留，并在.gitattributes中禁止字节换行转换以保护清单锁。

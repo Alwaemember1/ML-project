@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "package_local_python_exists": false,
+  "original_project_python_reused": true,
+  "actual_cmd_launcher_executed": true,
+  "http_health_200_ok": true,
+  "clear_new_computer_setup_message": true,
+  "new_environment_installed": false,
+  "model_changed": false,
+  "training_or_test_evaluation": false,
+  "url": "http://127.0.0.1:8601"
+}

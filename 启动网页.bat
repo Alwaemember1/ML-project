@@ -12,7 +12,14 @@ set "XDG_CACHE_HOME=%TEMP%"
 set "PYTHONUTF8=1"
 set "PYTHONPYCACHEPREFIX=%TEMP%\web_pycache"
 
+if exist "%PYTHON%" goto python_found
+if not exist "%~dp0..\..\FINAL_MODEL.json" goto missing_python
+set "PYTHON=%~dp0..\..\.venv\Scripts\python.exe"
 if not exist "%PYTHON%" goto missing_python
+echo Using the original project's Python environment.
+
+:python_found
+echo Python: %PYTHON%
 if not exist "%~dp0app.py" goto missing_app
 if not exist "%TEMP%\" mkdir "%TEMP%"
 if not exist "%TEMP%\" goto missing_temp
@@ -36,8 +43,11 @@ pause
 exit /b 0
 
 :missing_python
-echo Project Python was not found: %PYTHON%
-echo Keep this launcher in the project folder with its .venv environment.
+echo No project Python environment was found.
+echo This delivery contains the app and model, but does not include Python.
+echo On a new computer, follow README.md to create .venv and install dependencies.
+echo On the original computer, keep this folder inside the project's deliverables folder.
+echo Expected local Python: %~dp0.venv\Scripts\python.exe
 pause
 exit /b 1
 
