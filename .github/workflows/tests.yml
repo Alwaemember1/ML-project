@@ -25,5 +25,9 @@ jobs:
         run: python -m scripts.doctor
       - name: Synthetic tests without checkpoints or raw data
         run: python -m unittest discover -s tests -v
+      - name: Test bundled model with synthetic uploads
+        env:
+          LEAF_RUN_MODEL_TESTS: "1"
+        run: python -m unittest tests.test_image_formats.ImageFormatTests.test_web_upload_preview_and_real_prediction -v
       - name: Check committed split metadata only
         run: python -m scripts.prepare_formal_split --metadata-only

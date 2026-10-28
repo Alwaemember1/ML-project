@@ -257,7 +257,7 @@ Windows双击根目录`启动网页.bat`，或者：
 & '.\.venv\Scripts\python.exe' -m scripts.prepare_formal_split --metadata-only
 ```
 
-默认测试仅用合成图片、临时元数据和仓库内清单，不依赖模型权重或原始数据。网页真实权重集成测试默认跳过，避免CI暗中依赖本机模型。
+默认测试仅用合成图片、临时元数据和仓库内清单，不依赖模型权重或原始数据。网页真实权重集成测试在本地默认跳过；CI另设显式开启的步骤，使用仓库已附模型进行合成图片上传与推理检查。
 
 取得并配置权重后，可显式执行合成图片的真实模型上传检查：
 
@@ -269,7 +269,7 @@ Remove-Item Env:\LEAF_RUN_MODEL_TESTS
 
 该检查证明格式和代码流程，不计算数据集准确率，不代表真实拍摄泛化。首次环境请再人工确认一次实际上传、识别、换图清理、资料与报告下载。
 
-GitHub Actions使用Windows + Python3.14 + CPU依赖，运行默认测试、清单元数据检查，以及 `python -m scripts.doctor` 对默认配置、已发布模型SHA256和指标文件的检查；不重新训练或评价测试集。实际状态以仓库Actions运行记录为准。
+GitHub Actions使用Windows + Python3.14 + CPU依赖，运行默认测试、清单元数据检查，以及 `python -m scripts.doctor` 对默认配置、已发布模型SHA256和指标文件的检查，并显式开启11种后缀的合成图片真实模型上传检查；不重新训练或评价测试集。实际状态以仓库Actions运行记录为准。
 
 本次重整的[本地验证记录](docs/results/opensource_verification.json)：默认24项测试，23通过、1项真实权重测试显式跳过；另行开启的11种后缀真实模型AppTest通过；18个CLI帮助入口通过。在不含权重和数据的全新源码副本中，禁止torch.load后默认测试仍通过，清单元数据核对正常。同一内存合成图片的39类CPU概率与重整前完全一致。没有重新训练、重新评价测试集，未在全新CPU环境或远端Actions安装验收。
 
