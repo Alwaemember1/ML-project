@@ -192,7 +192,7 @@ def main():
     ]
     for source, relative in retained:
         retain(source, relative)
-    for name in ("README.md", "PROJECT_STATUS.md", "COURSE_REQUIREMENTS.md"):
+    for name in ("README.md", "FINAL_MODEL.json"):
         retain(ROOT / name, f"evidence/before_delivery_{name}")
     retain(Path(__file__), "evidence/build_submission_report.py")
     timestamp = datetime.now(ZoneInfo("Asia/Shanghai")).isoformat(timespec="seconds")

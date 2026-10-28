@@ -103,8 +103,8 @@ def main():
     log(f"experiment={output}; split_id={check['split_id']}")
     overall = time.perf_counter()
     try:
-        with (output / "status_before_v1.md").open("x", encoding="utf-8") as file:
-            file.write((ROOT / "PROJECT_STATUS.md").read_text(encoding="utf-8"))
+        with (output / "readme_before_v1.md").open("x", encoding="utf-8") as file:
+            file.write((ROOT / "README.md").read_text(encoding="utf-8"))
         save_json(output / "split_verification.json", check)
         if not torch.cuda.is_available():
             raise RuntimeError("现有 CUDA 环境不可用，拒绝自动改用 CPU")

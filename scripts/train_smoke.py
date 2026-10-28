@@ -172,7 +172,7 @@ def main():
         log(f"smoke output: {output}")
         log(LIMITATION)
         overall = time.perf_counter()
-        (output / "status_before_smoke.md").write_text((ROOT / "PROJECT_STATUS.md").read_text(encoding="utf-8"), encoding="utf-8")
+        (output / "readme_before_smoke.md").write_text((ROOT / "README.md").read_text(encoding="utf-8"), encoding="utf-8")
         if not torch.cuda.is_available():
             raise RuntimeError("CUDA 不可用；不回退 CPU 冒充 GPU 训练")
         if not CACHED_WEIGHTS.is_file():
