@@ -14,7 +14,10 @@ def default_record_path():
         path = Path(explicit).expanduser()
         return path if path.is_absolute() else ROOT / path
     local = ROOT / "FINAL_MODEL.local.json"
-    return local if local.is_file() else ROOT / "FINAL_MODEL.json"
+    if local.is_file():
+        return local
+    distribution = ROOT / "MODEL_CONFIG.json"
+    return distribution if distribution.is_file() else ROOT / "FINAL_MODEL.json"
 
 
 def resolve_record_file(value, record_path):

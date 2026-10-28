@@ -24,6 +24,8 @@ class ProjectConfigTests(unittest.TestCase):
         with patch.object(project_config, "ROOT", self.root), patch.dict(os.environ):
             os.environ.pop("LEAF_MODEL_RECORD", None)
             self.assertEqual(project_config.default_record_path(), self.root / "FINAL_MODEL.json")
+            (self.root / "MODEL_CONFIG.json").write_text("{}", encoding="utf-8")
+            self.assertEqual(project_config.default_record_path(), self.root / "MODEL_CONFIG.json")
             (self.root / "FINAL_MODEL.local.json").write_text("{}", encoding="utf-8")
             self.assertEqual(project_config.default_record_path(), self.root / "FINAL_MODEL.local.json")
             os.environ["LEAF_MODEL_RECORD"] = "custom.json"

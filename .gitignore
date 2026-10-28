@@ -20,7 +20,7 @@ Plant_leave_diseases_dataset_with_augmentation/
 .mypy_cache/
 uploads/
 cache/
-models/
+models/*
 checkpoints/
 deliverables/
 *.pt
@@ -47,3 +47,6 @@ htmlcov/
 *.pfx
 .DS_Store
 .ipynb_checkpoints/
+
+# Explicitly published frozen model; other checkpoints remain ignored
+!models/final_resnet18.pt

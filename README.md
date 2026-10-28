@@ -86,7 +86,7 @@
 
 ### 1 取得源码
 
-在GitHub仓库页面选择Code → Download ZIP，解压后进入含app.py的项目根目录；也可使用下列命令克隆源码。源码仓库不含模型和运行环境，完整老师离线包需单独交付。
+在GitHub仓库页面选择Code → Download ZIP，解压后进入含app.py的项目根目录；也可使用下列命令克隆源码。源码仓库已包含冻结模型，但不含Python运行环境；安装依赖后即可启动，完整免安装老师包仍需单独交付。
 
 也可在**替换示例用户名和仓库名后**使用Git：
 
@@ -149,9 +149,9 @@ CPU与GPU方案选一个，不必都装。torch使用官方专用索引，网页
 <a id="weights"></a>
 ## 准备并配置冻结权重
 
-### 1 自行取得完整检查点
+### 1 仓库已附完整检查点
 
-Git中不含权重，当前没有公开的项目权重下载URL。需要向项目维护者取得有权使用的完整检查点，或使用已有老师包中的同一文件；仓库不会自动下载替代数据或模型。
+仓库已包含约44.87 MB的锁定检查点`models/final_resnet18.pt`。正常克隆或下载完整源码ZIP即可取得，不需要另找模型或下载ImageNet预训练参数。默认使用仓库内`MODEL_CONFIG.json`，模型与真实指标均采用相对路径。安装好依赖即可进入启动网页步骤；以下本地配置步骤仅在需要覆盖位置时使用。
 
 推荐放置：
 
@@ -173,7 +173,7 @@ Get-FileHash .\models\final_resnet18.pt -Algorithm SHA256
 
 不要将ImageNet原始1000类权重、均衡实验模型、随机权重或重命名文件冒充该检查点。
 
-### 2 生成自己的本地配置
+### 2 可选：生成自己的本地配置
 
 ```powershell
 & '.\.venv\Scripts\python.exe' -m scripts.configure_model --checkpoint .\models\final_resnet18.pt
@@ -188,7 +188,7 @@ Get-FileHash .\models\final_resnet18.pt -Algorithm SHA256
 $env:LEAF_MODEL_RECORD = 'FINAL_MODEL.demo.local.json'
 ```
 
-配置选择顺序：`LEAF_MODEL_RECORD` → 根目录`FINAL_MODEL.local.json` → 原`FINAL_MODEL.json`。原记录内的D盘路径仅用于历史追溯，不要求新用户创建同样目录。文件路径相对于配置文件所在目录解析；不同盘符时可保留绝对路径。
+配置选择顺序：`LEAF_MODEL_RECORD` → 根目录`FINAL_MODEL.local.json` → 仓库`MODEL_CONFIG.json` → 原`FINAL_MODEL.json`。原记录内的D盘路径仅用于历史追溯，不要求新用户创建同样目录。文件路径相对于配置文件所在目录解析；不同盘符时可保留绝对路径。
 
 原项目用户如果已有有效的原记录与权重，可继续使用，不必生成新配置。
 
@@ -435,7 +435,7 @@ git diff --check
 git status --ignored --short
 ```
 
-只提交源码、测试、配置、固定划分元数据和必要真实结果。不要强行添加models、.venv、原图、reports、deliverables、上传文件、.env、Token、私钥或本机IDE/代理状态。
+只提交源码、测试、配置、固定划分元数据和必要真实结果。除已明确发布的models/final_resnet18.pt外，不要强行添加其他模型、.venv、原图、reports、deliverables、上传文件、.env、Token、私钥或本机IDE/代理状态。
 
 维护本项目时使用github远端；保留已有origin，不强推或覆盖其他历史。首次在已有本地项目中添加远端：
 

@@ -40,7 +40,7 @@
 553a89fd302dd00cf3abc2e8554151a66a053dcc0edec0d9fc4ee82159a4f8d8
 ```
 
-权重不进入Git，以老师交付包中的文件及SHA256核对。现有FINAL_MODEL.json保留原项目位置用于追溯；老师包中的副本改用相对模型/指标路径，类别、预处理和模型哈希不变。
+仓库已附models/final_resnet18.pt，以锁定SHA256核对；默认MODEL_CONFIG.json使用仓库内相对路径。现有FINAL_MODEL.json保留原项目位置用于追溯；老师包中的副本改用相对模型/指标路径，类别、预处理和模型哈希不变。
 
 ## 限制
 
