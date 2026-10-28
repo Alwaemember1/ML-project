@@ -65,6 +65,8 @@
 ├── docs/                         # 模型/数据说明、真实指标、曲线、课程交付说明
 ├── splits/formal_sha256_seed42_v1/# 固定清单、39类映射和字节哈希锁
 ├── dataset_config.json           # 原始数据目录配置
+├── models/final_resnet18.pt       # 已发布的原第3轮冻结模型
+├── MODEL_CONFIG.json             # 仓库默认推理配置，使用相对路径
 ├── FINAL_MODEL.json              # 原冻结实验记录，不要手工改写
 ├── FINAL_MODEL.local.json        # 首次部署生成；不进入Git
 ├── final_test_registry.json      # 原最终测试登记，防止静默重测
@@ -77,7 +79,7 @@
 └── 启动网页.bat                  # Windows启动器，不负责安装环境
 ```
 
-以下目录只存在于完整本地项目，不上传Git：`.venv/`、`models/`、原始图片目录、`reports/`、`deliverables/`和缓存。**克隆源码不等于已经取得权重、数据或安装环境。**
+仓库已包含唯一发布模型 `models/final_resnet18.pt` 和相对路径配置 `MODEL_CONFIG.json`。其他权重、`.venv/`、原始图片目录、`reports/`、`deliverables/`和缓存不上传Git。**完整克隆或GitHub Download ZIP包含演示权重；仍需安装Python和依赖，完整复训还需原始数据及历史工件。**
 
 不要按名字删除`smoke_utils.py`：网页和实验脚本共用它。原根目录的实验命令已迁移到`scripts/`，统一使用`python -m scripts.<脚本名>`，不要沿用历史报告中的旧路径。
 
@@ -88,7 +90,7 @@
 
 在GitHub仓库页面选择Code → Download ZIP，解压后进入含app.py的项目根目录；也可使用下列命令克隆源码。源码仓库已包含冻结模型，但不含Python运行环境；安装依赖后即可启动，完整免安装老师包仍需单独交付。
 
-也可在**替换示例用户名和仓库名后**使用Git：
+也可直接使用Git：
 
 ```powershell
 git clone https://github.com/Alwaemember1/ML-project.git leaf-disease-demo
@@ -255,7 +257,7 @@ Windows双击根目录`启动网页.bat`，或者：
 & '.\.venv\Scripts\python.exe' -m scripts.prepare_formal_split --metadata-only
 ```
 
-默认测试仅用合成图片、临时元数据和仓库内清单，不依赖模型权重或原始数据。网页真实权重集成测试默认跳过，避免CI暗中依赖本机模型。
+默认测试仅用合成图片、临时元数据和仓库内清单，不依赖模型权重或原始数据。网页真实权重集成测试在本地默认跳过；CI另设显式开启的步骤，使用仓库已附模型进行合成图片上传与推理检查。
 
 取得并配置权重后，可显式执行合成图片的真实模型上传检查：
 
@@ -267,7 +269,7 @@ Remove-Item Env:\LEAF_RUN_MODEL_TESTS
 
 该检查证明格式和代码流程，不计算数据集准确率，不代表真实拍摄泛化。首次环境请再人工确认一次实际上传、识别、换图清理、资料与报告下载。
 
-GitHub Actions文件已准备为Windows + Python3.14 + CPU依赖，运行默认测试和清单元数据检查；只有实际推送到GitHub并查看运行记录后，才能声称远端CI通过。
+GitHub Actions使用Windows + Python3.14 + CPU依赖，运行默认测试、清单元数据检查，以及 `python -m scripts.doctor` 对默认配置、已发布模型SHA256和指标文件的检查，并显式开启11种后缀的合成图片真实模型上传检查；不重新训练或评价测试集。实际状态以仓库Actions运行记录为准。
 
 本次重整的[本地验证记录](docs/results/opensource_verification.json)：默认24项测试，23通过、1项真实权重测试显式跳过；另行开启的11种后缀真实模型AppTest通过；18个CLI帮助入口通过。在不含权重和数据的全新源码副本中，禁止torch.load后默认测试仍通过，清单元数据核对正常。同一内存合成图片的39类CPU概率与重整前完全一致。没有重新训练、重新评价测试集，未在全新CPU环境或远端Actions安装验收。
 
@@ -421,13 +423,13 @@ $summary = Get-Content -LiteralPath (Join-Path $run 'training_summary.json') -Ra
 
 ### 发布检查
 
-导出不含模型和数据的源码ZIP，适合检查后上传GitHub；输出路径必须是不存在的新文件：
+导出不含模型和数据的纯源码ZIP；脚本自动跳过已发布的 `models/final_resnet18.pt`，其他意外加入候选的权重或本机工件仍会报错。输出路径必须是不存在的新文件：
 
 ```powershell
 & '.\.venv\Scripts\python.exe' -m scripts.export_source --output .\deliverables\github_source_new.zip
 ```
 
-它根据Git候选文件生成包，并拒绝常见的本地工件。仍应检查内容和第三方授权，不会自动创建远端或上传。
+纯源码ZIP用于源码审查，不是含权重的演示包；需要完整演示源码时直接使用GitHub的Code → Download ZIP或git clone。纯源码包中的SOURCE_EXPORT.json会注明权重已排除；模型配置仍指向models/final_resnet18.pt，需另行提供哈希匹配的模型才能推理。脚本在创建ZIP前核对全部候选，不会自动创建远端或上传。
 
 ```powershell
 git status --short
@@ -474,6 +476,6 @@ git push -u github main
 
 资料来源由开发时整理的标题、URL和病害类别映射组成，位于plant_care.py，不是识别时联网检索或来源机构对上传图片的诊断。核对日期为维护日期，链接未来可能变化。风险规则未田间验证，不是病斑严重程度、发生概率或官方检疫等级。实际处置需专业复核。
 
-原图、模型、旧报告及其哈希保留在本地；仓库忽略这些内容不等于删除。当前模型不支持通用域外检测，也不具备精准施药决策能力。
+原图、其他实验模型、旧报告及其哈希保留在本地；仓库已单独附带原冻结模型，其他本地工件被忽略不等于删除。当前模型不支持通用域外检测，也不具备精准施药决策能力。
 
 技术参考：[PyTorch安装](https://pytorch.org/get-started/locally/)、[Streamlit项目配置](https://docs.streamlit.io/develop/api-reference/configuration/config.toml)、[MIT许可说明](https://choosealicense.com/licenses/mit/)。运行版本以本项目实际记录和依赖文件为准，官方网页内容会更新。
