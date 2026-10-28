@@ -45,11 +45,13 @@ class FinalTestImages(Dataset):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--training-run", required=True, type=Path, help="由 PROJECT_STATUS 指向的已验收训练目录")
+    parser.add_argument("--training-run", required=True, type=Path, help="原实验已验收的训练目录")
+    parser.add_argument("--project-status", required=True, type=Path,
+                        help="Git历史中的原实验验收说明快照，保留检查点路径核对")
     parser.add_argument("--implementation-fix-reason", help="仅真实实现错误修复后的明确重新评价原因；不能因模型分数重测")
     args = parser.parse_args()
     training_run = args.training_run.resolve()
-    status_before = (ROOT / "PROJECT_STATUS.md").read_text(encoding="utf-8")
+    status_before = args.project_status.read_text(encoding="utf-8")
     completion = json.loads((training_run / "completion.json").read_text(encoding="utf-8"))
     config = json.loads((training_run / "training_config.json").read_text(encoding="utf-8"))
     training = json.loads((training_run / completion["training_report"]).read_text(encoding="utf-8"))
@@ -59,7 +61,7 @@ def main():
     if not checkpoint_path.is_relative_to(training_run) or checkpoint_path.name != "best_epoch_003.pt":
         raise ValueError("最佳检查点路径与实际训练记录不符")
     if checkpoint_path.relative_to(ROOT).as_posix() not in status_before.replace("\\", "/"):
-        raise ValueError("PROJECT_STATUS 与训练记录中的最佳模型路径不一致")
+        raise ValueError("原验收说明与训练记录中的最佳模型路径不一致")
     check = verify_split(SPLIT)
     if check["counts"]["test"] != 9192 or check["counts"] != completion["counts"]:
         raise ValueError("固定测试数量不符；停止，不重建划分")
@@ -113,7 +115,7 @@ def main():
         raise ValueError("数据根目录与固定划分不一致")
     output = ROOT / "reports" / now().strftime("final_test_%Y%m%d_%H%M%S_%f")
     output.mkdir(parents=True, exist_ok=False)
-    command = f"& '{sys.executable}' -m scripts.evaluate_final --training-run '{training_run}'"
+    command = f"& '{sys.executable}' -m scripts.evaluate_final --training-run '{training_run}' --project-status '{args.project_status.resolve()}'"
     if args.implementation_fix_reason:
         command += " --implementation-fix-reason " + json.dumps(args.implementation_fix_reason, ensure_ascii=False)
     identity = {"checkpoint": str(checkpoint_path), "checkpoint_sha256": checkpoint_hash, "epoch": 3,

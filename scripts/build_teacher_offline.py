@@ -13,6 +13,8 @@ import zipfile
 from datetime import datetime
 from pathlib import Path
 
+from scripts.delivery_readme import delivery_readme
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -69,7 +71,7 @@ def ignored(directory, names):
 
 def teacher_documents(output):
     """同一份老师说明同时提供Markdown和无需编辑器的离线HTML。"""
-    markdown = (ROOT / "docs/TEACHER_OFFLINE_README.md").read_text(encoding="utf-8")
+    markdown = delivery_readme(offline=True)
     (output / "README.md").write_text(markdown, encoding="utf-8")
 
     def inline(text):

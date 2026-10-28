@@ -9,6 +9,8 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+from scripts.delivery_readme import delivery_readme
+
 ROOT = Path(__file__).resolve().parents[1]
 COURSE = ROOT / "reports/course_submission_20261019_v1"
 
@@ -62,10 +64,10 @@ def main():
     for folder in ("scripts", "tests"):
         for path in sorted((ROOT / folder).glob("*.py")):
             copy(path, f"experiment_source/{folder}/{path.name}")
-    for name in ("LICENSE", "THIRD_PARTY_NOTICES.md"):
+    for name in ("LICENSE",):
         if (ROOT / name).is_file():
             copy(ROOT / name, name)
-    for name in ("dataset_config.json", "final_test_registry.json", "COURSE_REQUIREMENTS.md", "PROJECT_STATUS.md"):
+    for name in ("dataset_config.json", "final_test_registry.json", "README.md"):
         copy(ROOT / name, f"experiment_source/{name}")
     for path in sorted((ROOT / "splits/formal_sha256_seed42_v1").glob("*")):
         if path.is_file():
@@ -78,8 +80,7 @@ def main():
         for path in sorted((COURSE / folder).rglob("*")):
             if path.is_file():
                 copy(path, f"docs/{path.relative_to(COURSE).as_posix()}")
-    copy(ROOT / "docs/TEACHER_HANDOFF.md", "docs/TEACHER_HANDOFF.md")
-    copy(ROOT / "docs/TEACHER_README.md", "README.md")
+    (output / "README.md").write_text(delivery_readme(), encoding="utf-8")
     # 新的交付说明覆盖旧文档的历史端口提示，不修改已有报告本身。
     if sha256(record_file) != original_record_hash or sha256(checkpoint) != record["checkpoint_sha256"]:
         raise AssertionError("原冻结记录或模型在打包期间改变")

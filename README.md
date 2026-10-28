@@ -32,9 +32,9 @@
 | 作物与病害多分类识别模型 | ImageNet预训练ResNet18，冻结主干及BatchNorm统计，训练39类分类头 | 网页使用原第3轮冻结模型，已保存训练、验证和最终测试记录 |
 | 输出严重程度或风险等级 | 按Top1类别输出高、中、低参考风险；背景类不适用，并展示依据 | 采用课程中的风险等级路线；类别规则原型，未完成图像严重程度或田间风险验证 |
 | 支持图片上传的识别可视化系统 | Streamlit中文页面，上传预览、Top1与Top3、中英文类别表 | 本机运行，支持11种图片后缀，不需要原始数据集 |
-| 报告与针对性防治方案 | 既有实验指标、曲线、弱类分析；按预测类别展示复核要点、管理资料和来源，下载Markdown报告 | 防治内容供复核参考；完整课程任务对照见[任务说明](COURSE_REQUIREMENTS.md) |
+| 报告与针对性防治方案 | 既有实验指标、曲线、弱类分析；按预测类别展示复核要点、管理资料和来源，下载Markdown报告 | 防治内容供复核参考；未完成田间防效或精准施药验证 |
 
-课程方案给出的参考数据入口为 [TensorFlow Datasets PlantVillage](https://tensorflow.google.cn/datasets/catalog/plant_village)。现有实验使用本地 `Plant_leave_diseases_dataset_with_augmentation` 的39类材料，其上游来源及增强链路尚未完整核实，不能将其直接等同于课程链接中的数据版本。详见[数据说明](docs/DATA_CARD.md)。
+课程方案给出的参考数据入口为 [TensorFlow Datasets PlantVillage](https://tensorflow.google.cn/datasets/catalog/plant_village)。现有实验使用本地 `Plant_leave_diseases_dataset_with_augmentation` 的39类材料，其上游来源及增强链路尚未完整核实，不能将其直接等同于课程链接中的数据版本。原始数据不随仓库分发，类别标签不包含病斑掩码或严重程度。
 
 ## 主要功能
 
@@ -59,7 +59,22 @@
 
 均衡实验同时改变训练规模及更新次数，不能将差异全部归因于均衡。原模型马铃薯晚疫病测试召回率54.67%，番茄二斑叶螨危害为60.56%，整体准确率不能替代逐类分析。
 
-查看[实验结果与全部39类指标](docs/RESULTS.md)、[模型说明](docs/MODEL_CARD.md)及 `docs/results/`。这些是已有实验记录，不会随上传图片改变。
+完整结果保留在 `docs/results/`，主要文件如下。这些是已有实验记录，不会随上传图片改变。
+
+| 文件 | 内容 |
+| --- | --- |
+| [original_test_metrics.json](docs/results/original_test_metrics.json) | 原模型最终测试完整指标 |
+| [original_test_per_class.csv](docs/results/original_test_per_class.csv) | 全部39类的precision、recall及F1 |
+| [original_test_confusion_pairs.csv](docs/results/original_test_confusion_pairs.csv) | 错分类别对及比例 |
+| [original_training_metrics.csv](docs/results/original_training_metrics.csv) | 原模型逐轮训练记录 |
+| [balanced_training_metrics.csv](docs/results/balanced_training_metrics.csv) | 均衡实验逐轮训练记录 |
+| [validation_per_class_comparison.csv](docs/results/validation_per_class_comparison.csv) | 两模型在相同验证集的逐类对照 |
+
+![原模型训练曲线](docs/figures/original_training_curves.png)
+
+![均衡模型训练曲线](docs/figures/balanced_training_curves.png)
+
+模型推理使用EXIF方向修正、RGB、短边缩放256、中心裁剪224、双线性插值及ImageNet均值与标准差。中文名称仅用于展示，不修改类别编号、分类分数或拒识阈值。
 
 ## 目录结构
 
@@ -84,7 +99,9 @@ ML-project/
 ├── scripts/                      # 数据、训练、评价、打包和诊断脚本
 ├── tests/                        # 配置、格式、指标、导出等测试
 ├── splits/                       # 固定训练验证测试清单及哈希锁
-├── docs/                         # 模型、数据、实验和开发说明
+├── docs/
+│   ├── results/                  # 真实实验指标、逐类CSV和验证记录
+│   └── figures/                  # 原模型与均衡实验训练曲线
 ├── requirements*.txt             # 依赖版本清单 不包含安装目录
 ├── .github/workflows/tests.yml   # Windows CPU自动化检查
 ├── .streamlit/config.toml        # 页面主题、端口和上传限制
@@ -226,13 +243,110 @@ CI执行依赖安装、默认模型与配置检查、默认测试、11种后缀�
 
 完整训练源码、固定划分及结果记录均已保留，但原图、预训练缓存、历史审计报告和均衡候选清单没有随仓库分发。`dataset_config.json` 用于数据治理工具；仅改它不能迁移全部历史训练流程。
 
-复训需要恢复原始图片及固定配置引用的历史工件、准备ImageNet缓存和可用CUDA环境，再执行严格划分校验。步骤、必要工件、首轮检查、训练及验证命令见 [数据治理与实验复现](docs/DEVELOPMENT.md)。缺少工件时程序应明确失败，不能改锁绕过检查来宣称复现。
+复训需要恢复原始图片及固定配置引用的历史工件、准备ImageNet缓存和可用CUDA环境，再执行严格划分校验。必要工件和开发命令见下方折叠说明。缺少工件时程序应明确失败，不能改锁绕过检查来宣称复现。
 
 原最终测试已登记，不作为任意新模型的反复调参工具。正式清单、原模型、历史成绩及来源锁保持不变。若新增数据或模型，应另建独立实验。
 
+
+<details>
+<summary>开发者可展开查看数据检查与训练复现步骤</summary>
+
+### 数据检查
+
+`dataset_config.json` 的 `dataset_root` 应指向直接包含类别子文件夹的数据根目录。下面的可读性检查只读原图并生成新报告，不移动或删除原始图片：
+
+```powershell
+& '.\.venv\Scripts\python.exe' -m scripts.check_dataset --dataset-root 'D:\data\your_dataset' --output-root .\reports
+```
+
+`python -m scripts.prepare_formal_split --metadata-only` 只检查仓库清单的哈希、数量、类别及跨集合路径和字节哈希交集，不读取原图，不证明排除了增强同源泄漏。不带该选项的严格检查还需恢复历史来源与smoke清单；已有划分不要使用 `--create` 重建或覆盖。
+
+#### 必要工件
+
+| 工件 | 原项目位置/要求 |
+| --- | --- |
+| 原始图片 | dataset_config.json及固定split_config记录的数据根目录 |
+| 可读性清单 | reports/check_20261016_133031_170321/ |
+| 字节去重来源清单 | reports/pretrain_20261016_230415/sha256_manifest.csv |
+| 预训练缓存 | reports/pretrain_20261016_230415/torch_cache/checkpoints/resnet18-f37072fd.pth |
+| smoke抽样记录 | 固定split_config.json中的smoke_manifests |
+| 固定划分与锁 | splits/formal_sha256_seed42_v1/，保持字节不变 |
+| 原模型与冻结记录 | 只作对照或推理，不接续smoke检查点训练 |
+
+没有这些工件时先阅读CLI的`--help`，不要以“重新扫描一次并改配置”声称复现旧结果。新数据应另立完整实验和记录；本项目未将原实验自动泛化成任意新数据的一键训练框架。
+
+#### 环境诊断 不训练
+
+```powershell
+New-Item -ItemType Directory -Force .\reports | Out-Null
+& '.\.venv\Scripts\python.exe' -m scripts.check_training_environment --output .\reports\environment_new.json --gpu
+```
+
+此工具记录环境并执行GPU张量和随机权重ResNet18前向；随机前向通过不表示迁移学习权重已就绪。`--pretrained`会额外下载并测试ImageNet预训练权重，只有明确需要且允许下载时才使用；本轮整理没有调用它。
+
+#### 启动新的分类头实验
+
+满足全部原工件和严格来源检查后，可在**全新输出目录**运行：
+
+```powershell
+& '.\.venv\Scripts\python.exe' -m scripts.train_v1 --batch-size 32 --output-dir .\reports\user_experiment_new
+```
+
+主干和BatchNorm固定，只训练新39类分类头；CrossEntropyLoss、Adam、lr0.001、最多10轮、patience3。训练随机裁剪/翻转；验证确定性预处理。数据加载num_workers0，Windows保留main入口保护。当前训练入口要求CUDA，不自动用CPU冒充原GPU实验。
+
+第1轮结束会等待检查，最长30分钟。请在另一个终端查看`first_epoch_ready.json`，确认head_updated为true，主干参数/缓冲不变且无主干梯度；通过后才创建继续标记：
+
+```powershell
+$run = Join-Path $PWD 'reports\user_experiment_new'
+$ready = Get-Content -LiteralPath (Join-Path $run 'first_epoch_ready.json') -Raw | ConvertFrom-Json
+if (-not $ready.head_updated -or -not $ready.frozen_check.backbone_parameters_and_buffers_unchanged -or -not $ready.frozen_check.backbone_gradients_absent) {
+    throw '第1轮核对未通过，不应继续。'
+}
+$gate = Join-Path $run 'continue_after_epoch1.json'
+if (Test-Path -LiteralPath $gate) { throw '继续标记已存在，不覆盖。' }
+$text = @{split_id=$ready.split_id; checked_epoch=1} | ConvertTo-Json
+[System.IO.File]::WriteAllText($gate, $text, [System.Text.UTF8Encoding]::new($false))
+```
+
+实际进度查看：
+
+```powershell
+Get-Content .\reports\user_experiment_new\training.log -Tail 20
+Get-Content .\reports\user_experiment_new\run_state.json -Raw
+```
+
+不要因新实验结果回落自行增加轮数或把测试集用于调参。最佳及最后轮检查点、配置、逐轮指标、曲线与源码快照均保存在独立目录。
+
+#### 均衡对照及独立重载
+
+均衡入口使用已锁定、来自原训练集的候选清单。原项目候选位置为`reports/course_completion_20261018_193414_578564/report_v2/candidate_balanced_train_seed42.csv`，以及同目录candidate_balance_lock.json；未随仓库上传。
+
+```powershell
+& '.\.venv\Scripts\python.exe' -m scripts.train_v1 --balanced-manifest .\reports\course_completion_20261018_193414_578564\report_v2\candidate_balanced_train_seed42.csv --output-dir .\reports\balanced_experiment_new
+```
+
+同样执行首轮检查。完成后从training_summary.json读取实际最佳路径，不凭文件名猜测：
+
+```powershell
+$run = Join-Path $PWD 'reports\user_experiment_new'
+$summary = Get-Content -LiteralPath (Join-Path $run 'training_summary.json') -Raw | ConvertFrom-Json
+& '.\.venv\Scripts\python.exe' -m scripts.predict_smoke --checkpoint $summary.best_checkpoint --reference (Join-Path $run 'best_validation_reference.json') --output (Join-Path $run 'reload_new.json')
+```
+
+历史训练记录的源码哈希对应当时布局。当前目录重整后，旧评价入口可能拒绝源码锁；应查看当时source_snapshot，不得为重测分数而删除保护。原开发历史可从Git提交记录追溯。
+
+
+### 验证与最终测试
+
+完成独立均衡实验后，可用 `python -m scripts.compare_balanced_validation --run-dir <实验目录>` 比较原验证集；这不构成新的最终测试。
+
+`python -m scripts.evaluate_final --help` 可查看原最终测试入口。该入口绑定原实验与来源锁，不是任意新模型的通用测试器；执行时还必须用 `--project-status` 提供Git历史保留的原验收说明快照，原路径核对与重复测试登记保护仍然有效。缺少历史工件、来源锁不符或只是希望提高分数时，不应重新评价。
+
+</details>
+
 ## 提交范围与打包
 
-完整仓库或GitHub Download ZIP包含源码、依赖清单、默认配置、唯一冻结模型、固定划分、测试和必要实验结果。模型约44.87 MB是演示所需权重，继续保留；无需打包已安装的依赖。
+项目只保留这一份README作为说明入口；实验指标和曲线在docs内，开发过程可从Git历史追溯。完整仓库或GitHub Download ZIP包含源码、依赖清单、默认配置、唯一冻结模型、固定划分、测试和必要实验结果。模型约44.87 MB是演示所需权重，继续保留；无需打包已安装的依赖。
 
 不上传 `.venv/`、Python安装目录、依赖安装目录、原始数据、其他权重、缓存、上传图片、`reports/`、`deliverables/`、密钥或编辑器个人配置。Git忽略这些目录不等于删除本地原件。
 
@@ -269,6 +383,16 @@ CI执行依赖安装、默认模型与配置检查、默认测试、11种后缀�
 
 防治资料按预测类别匹配，来源保存在 `plant_care.py`；不是对当前图片进行联网确诊。健康预测不能排除其他问题，风险规则未经田间验证，实际处置需结合现场情况与植保复核。
 
-原创代码采用 [MIT许可证](LICENSE)。原始数据、预训练和微调权重及第三方资料不自动适用原创代码的MIT许可，详见 [第三方内容说明](THIRD_PARTY_NOTICES.md)。
+原创代码采用 [MIT许可证](LICENSE)。许可证仅覆盖维护者有权授权的原创代码与说明，不授予第三方数据、预训练权重、机构商标或资料的新权利。
+
+| 内容 | 许可与来源说明 |
+| --- | --- |
+| PyTorch、torchvision、Streamlit、Pillow及其依赖 | 通过依赖清单安装，遵循各上游项目许可 |
+| ImageNet预训练ResNet18及本项目微调模型 | 已附唯一冻结检查点；不自动纳入原创代码MIT许可，分发时需分别核查上游权利 |
+| 本地增强叶片数据集 | 上游来源、增强链路及分发许可尚未完整核实，原图不上传 |
+| 大学推广与农业机构防治资料 | 来源保存在plant_care.py，不表示来源机构为预测结果背书 |
+| 实验曲线与指标 | 保留真实记录及评价局限，不保证生产场景效果 |
+
+上游项目：[PyTorch](https://github.com/pytorch/pytorch)、[torchvision](https://github.com/pytorch/vision)、[Streamlit](https://github.com/streamlit/streamlit)、[Pillow](https://github.com/python-pillow/Pillow)。
 
 项目仓库：https://github.com/Alwaemember1/ML-project
