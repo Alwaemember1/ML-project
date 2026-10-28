@@ -21,6 +21,7 @@ def sha256(path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--no-archive", action="store_true", help="仅创建目录，供后续离线环境打包使用")
     args = parser.parse_args()
     output = args.output_dir.resolve()
     if not output.is_relative_to(ROOT / "deliverables"):
@@ -89,6 +90,9 @@ def main():
                 "records": [{"path": path.relative_to(output).as_posix(), "bytes": path.stat().st_size,
                              "sha256": sha256(path)} for path in files]}
     (output / "DELIVERY_MANIFEST.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+    if args.no_archive:
+        print(json.dumps({"output": str(output), "archive_created": False}, ensure_ascii=False))
+        return
     archive = output.with_suffix(".zip")
     with zipfile.ZipFile(archive, "x", compression=zipfile.ZIP_DEFLATED, compresslevel=6) as zipped:
         for path in sorted(output.rglob("*")):

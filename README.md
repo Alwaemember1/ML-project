@@ -1,10 +1,12 @@
 # 植物叶片病害识别与防治参考系统
 
+**老师免安装演示版**：本机交付文件为`deliverables/teacher_offline_20261028_v1.zip`，包含独立Windows x64 Python、依赖和原冻结模型，完整解压后双击`启动网页.bat`。包内`项目说明.html`和`README.md`面向老师介绍项目、推理和真实训练结果。见[离线版说明](docs/TEACHER_OFFLINE_README.md)。该大文件不进入Git，需单独交付；尚未在另一台实体电脑验收。
+
 基于 **PyTorch、ResNet18迁移学习和Streamlit** 的中文单图识别项目。支持固定39类，输出Top1、Top3、可复制的中英文类别，以及按预测类别匹配的参考风险与有来源的管理资料。
 
 **当前实现的是病害分类和类别参考风险，不具备经过验证的病情轻中重诊断或直接施药处方能力。** 分类分数不等于诊断可靠性；真实拍摄泛化尚未专项验证。
 
-原创代码采用 [MIT](LICENSE)。原始数据、预训练/微调权重和第三方资料的授权另行说明，见 [第三方内容](THIRD_PARTY_NOTICES.md)。本次整理尚未创建GitHub仓库、发布模型Release或执行GitHub Actions。
+原创代码采用 [MIT](LICENSE)。原始数据、预训练/微调权重和第三方资料的授权另行说明，见 [第三方内容](THIRD_PARTY_NOTICES.md)。源码仓库：[Alwaemember1/ML-project](https://github.com/Alwaemember1/ML-project)。模型Release尚未发布，GitHub Actions实际运行状态以仓库页面为准。
 
 ## 目录
 
@@ -84,13 +86,12 @@
 
 ### 1 取得源码
 
-本项目正在准备GitHub发布，尚未提供实际GitHub地址。发布后可在GitHub选择Code → Download ZIP，解压后进入含app.py的项目根目录。
+在GitHub仓库页面选择Code → Download ZIP，解压后进入含app.py的项目根目录；也可使用下列命令克隆源码。源码仓库不含模型和运行环境，完整老师离线包需单独交付。
 
 也可在**替换示例用户名和仓库名后**使用Git：
 
 ```powershell
-# 示例URL是占位符，不是已发布地址；必须替换。
-git clone https://github.com/YOUR_GITHUB_USER/YOUR_REPOSITORY.git leaf-disease-demo
+git clone https://github.com/Alwaemember1/ML-project.git leaf-disease-demo
 Set-Location .\leaf-disease-demo
 ```
 
@@ -436,15 +437,14 @@ git status --ignored --short
 
 只提交源码、测试、配置、固定划分元数据和必要真实结果。不要强行添加models、.venv、原图、reports、deliverables、上传文件、.env、Token、私钥或本机IDE/代理状态。
 
-创建GitHub空仓库后，按你的真实URL设置一个新remote；保留已有origin，不强推或覆盖其他历史：
+维护本项目时使用github远端；保留已有origin，不强推或覆盖其他历史。首次在已有本地项目中添加远端：
 
 ```powershell
-# 把下列URL替换为实际仓库。
-git remote add github https://github.com/YOUR_GITHUB_USER/YOUR_REPOSITORY.git
+git remote add github https://github.com/Alwaemember1/ML-project.git
 git push -u github main
 ```
 
-当前GitHubURL未知，本次不会替你创建或上传到一个猜测的仓库。MIT只覆盖原创代码；模型和图片公开发布前单独确认分发权限。
+如果已经存在github远端，无需重复添加；从GitHub新克隆时默认远端名为origin。MIT只覆盖原创代码；模型和图片公开发布前单独确认分发权限。
 
 参与开发与安全问题见 [贡献说明](CONTRIBUTING.md)、[安全说明](SECURITY.md)、[老师交付建议](docs/TEACHER_HANDOFF.md)。根目录README是当前执行说明；旧报告命令属于当时历史记录。
 
