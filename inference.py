@@ -9,7 +9,7 @@ import warnings
 from dataclasses import dataclass, field
 from pathlib import Path
 
-# 此模块先于 Streamlit 导入，复用已有 D 盘缓存和已验证的模型/预处理构造。
+# 此模块先于 Streamlit 导入，复用项目运行目录和已验证的模型/预处理构造。
 from smoke_utils import ROOT, build_transform, model_for_classes, validate_mapping
 from project_config import FROZEN_SHA256, default_record_path, resolve_record_file as resolve_config_file
 

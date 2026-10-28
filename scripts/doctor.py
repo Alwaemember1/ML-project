@@ -33,7 +33,7 @@ def diagnose(check_gpu=False):
         if metrics["total"] != 9192 or len(metrics["classes"]) != 39:
             raise ValueError("指标文件不匹配")
     except (OSError, ValueError, KeyError, TypeError) as exc:
-        checks.append(f"模型/指标配置不可用：{exc}；先取得权重，再执行python -m scripts.configure_model --checkpoint <文件位置>")
+        checks.append(f"模型/指标配置不可用：{exc}；确认完整克隆包含models/final_resnet18.pt及MODEL_CONFIG.json；自定义位置时执行python -m scripts.configure_model --checkpoint <文件位置>")
     gpu = "未检测；加--gpu可查询，CPU演示不要求GPU"
     if check_gpu:
         try:
